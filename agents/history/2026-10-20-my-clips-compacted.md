@@ -90,3 +90,36 @@ Held Workspace52 draft418787958 was deleted before publication; source tag retai
 Use final Clips4/Workspace53 and explicitly test already-initialized DB restart.
 Backup space is being recovered using in-place NTFS compression of older backups,
 with full checksums verified, all paths retained and latest rollback untouched.
+
+Navigation delivery checkpoint: the normal owner51-to53 update completed at
+2026-10-20T20:13:11Z with Clips4 and all21 health entries running. Existing21 app
+versions/packages, identity and storage paths were preserved. The tested shared
+navigation JavaScript matches the public site. The protected backup manifest
+verified; normal post-update cleanup retired one older automatic snapshot. The
+pre-update snapshot includes Clips2's restart defect, so manifest verification
+is not a full restore acceptance. Do not reset/downgrade the Clips database.
+
+Clips4 f515b49f51f44e39b0e33c6afe540def80280719 is public, release418821629,
+14 assets with every remote digest verified. Anonymous full Windows ZIP SHA256:
+37cf9d870c3d577303ebf1fb792c4470a63f308247d0f4addab1733ad9ad5a2e.
+Published2/3 release notes now point to4; their tags/assets remain unchanged.
+Workspace53 source1bd7da57aa476ba17fed1caa1e77a885e65dc7aa is pushed/tagged and
+installed, but release418821668 is still a draft while large uploads transfer.
+A gh upload timed out; curl now sends known-length files over HTTP1.1. Actions
+remains disabled at the user's explicit request. Never publish until all exact
+prepared assets match their remote sizes and SHA256.
+
+Initialized Clips2-to4 normal upgrade and full second restart passed with the
+same synthetic account. Phone/desktop checks cover320–1024px; all six bottom
+navigation targets are separate. Named synthetic C cache is stopped/removed;
+owner state was not a fixture. Two older NTFS snapshots were compressed in place
+with every recorded checksum and root ACL verified; no manual backup deletion.
+Local source clones and builds/my-clips-0.1.0-preview.4 are synchronized.
+
+Delivery continuation: I:/Projects/tooling/clips-navigation-20261020 contains
+publish-http1.py and complete-delivery53.ps1. The latter waits for publication,
+verifies anonymous delivery/installed hashes, records final sanitized receipts,
+commits only named evidence files, pushes, and fast-forwards local clones. Read
+delivery53-status.json and release-workspace53-remote.json before resuming; do
+not repeat the owner update or rebuild immutable released assets. Build/release
+artifacts remain on I. Preserve the four unrelated untracked suite histories.

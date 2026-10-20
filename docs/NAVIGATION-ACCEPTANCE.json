@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "workspaceReleasePending": true,
+  "app": {
+    "id": 418821629,
+    "tag": "v0.1.0-preview.4",
+    "commit": "f515b49f51f44e39b0e33c6afe540def80280719",
+    "assets": 14,
+    "allSizesAndSHA256Match": true,
+    "published": true,
+    "url": "https://github.com/oneworkspacestudio/my-clips/releases/tag/v0.1.0-preview.4"
+  },
+  "workspaceSourceCommit": "1bd7da57aa476ba17fed1caa1e77a885e65dc7aa",
+  "layoutAndUpgrade": {
+    "schema": 1,
+    "workspace": "0.3.0-preview.53",
+    "clips": "0.1.0-preview.4",
+    "checks": [
+      "published51/Clips2 initialized to schema3 before update",
+      "published51-to53 normal backed-up update",
+      "identity, paths, ordinary bytes and app selections preserved",
+      "Accounts/Drive payloads unchanged",
+      "native MyAccounts login and Clips single sign-in",
+      "same account retained after upgrade and full second restart",
+      "actual packaged UI at320/390/600/768/1024px",
+      "six nonoverlapping phone targets at least44px",
+      "all five app tabs remain clickable",
+      "picker opens, Escape restores focus",
+      "reload retains integrated navigation",
+      "no page JavaScript errors"
+    ],
+    "ownerDataUsed": false,
+    "physicalDevice": false,
+    "androidClientUnchanged": true
+  },
+  "publicApp": {
+    "schema": 1,
+    "tag": "v0.1.0-preview.4",
+    "public": true,
+    "allAssetSizesAndSHA256Match": true,
+    "anonymous": true,
+    "fullWindowsZIPDownloaded": true,
+    "sha256": "37cf9d870c3d577303ebf1fb792c4470a63f308247d0f4addab1733ad9ad5a2e",
+    "size": 7198017
+  },
+  "ownerInstallation": {
+    "schema": 1,
+    "workspace": "0.3.0-preview.53",
+    "clips": "0.1.0-preview.4",
+    "apps": 22,
+    "previousWorkspace": "0.3.0-preview.51",
+    "identityAndPathsPreserved": true,
+    "other21AppVersionsAndPackagesPreserved": true,
+    "clipsSHA256": "293e80d3ec88e146bd26faa7bd6c2812749fe0a9ba28a5374107a50c8e6b311d",
+    "managerSHA256": "a1f3fbecadd72932594ce21a6e9d145cb99358fbbb97fdb63715d2a264348f05",
+    "publicArtifactDigestsMatched": false,
+    "localPackageChecksumsVerified": true,
+    "normalBackedUpUpdater": true,
+    "ownerUsedAsFixture": false,
+    "allServicesHealthy": true,
+    "healthyServiceEntries": 21,
+    "rollbackManifestSHA256": "39ec35da851344d15b06ba1c9f740f7cb79f50ac2eeaca5a134fc7cf78d23e33",
+    "rollbackVerified": true,
+    "completedAt": "2026-10-20T20:13:11.708185Z"
+  },
+  "publicNavigationMatchesTestedSource": true,
+  "cleanup": {
+    "schema": 1,
+    "taskCacheRemoved": true,
+    "processAndReparseChecksPassed": true,
+    "syntheticFixtureServersStopped": true,
+    "ownerStateExcluded": true,
+    "buildArtifactsRetained": true,
+    "freeGiB": 17.64
+  }
+}
