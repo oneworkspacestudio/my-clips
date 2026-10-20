@@ -49,3 +49,10 @@ services healthy. Installed binaries match the public release. The latest
 recovery manifest checksum is verified. This installation used the normal
 backed-up updater; acceptance fixtures remained isolated. Machine-readable final
 evidence is in RELEASE-ACCEPTANCE.json.
+
+## Navigation correction in preview3
+
+The built UI and shared Workspace52 adapter passed synthetic Chrome layout and
+interaction checks at320–1024px, including six nonoverlapping phone targets,
+all app tabs, picker opening, Escape/focus return and fallback restoration.
+Android client2 serves this updated UI; no new device acceptance is claimed.

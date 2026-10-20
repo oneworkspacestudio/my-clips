@@ -1,5 +1,15 @@
 # Changes
 
+## 0.1.0-preview.3
+
+Workspace now has its own navigation item on phones and in the sidebar on wider
+screens. With Workspace52, this opens the app picker and suppresses the floating
+launcher while the integrated control is visible. All six phone items fit at
+320 CSS pixels; no launcher covers For You or video captions. Keyboard activation,
+Escape dismissal and focus return remain available. The link opens Workspace
+normally if the picker script is unavailable. Android client2 uses this updated
+server UI without requiring a new APK.
+
 ## 0.1.0-preview.2
 
 Initial standalone Windows/PWA/Android application with vertical video feeds,

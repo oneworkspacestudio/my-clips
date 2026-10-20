@@ -30,7 +30,10 @@ export function Shell({ data, onAction }: { data: any; onAction: (name: string) 
           <Text>Settings</Text>
         </Link>
         {data.workspace && (
-          <Link href={data.workspace} variant="ecosystem">↖ One Workspace</Link>
+          <Link href={data.workspace} variant="ecosystem" workspaceApps={true} aria-label="Open Workspace apps">
+            <Icon name="PanelsTopLeft" size={23} />
+            <Text>Workspace</Text>
+          </Link>
         )}
         <Text variant="footnote">Your server. Your creativity.</Text>
         <Text variant="footnote">{data.versionText}</Text>
@@ -60,6 +63,12 @@ export function Shell({ data, onAction }: { data: any; onAction: (name: string) 
             <Text>{item.title}</Text>
           </Link>
         ))}
+        {data.workspace && (
+          <Link href={data.workspace} variant="nav" workspaceApps={true} aria-label="Open Workspace apps">
+            <Icon name="PanelsTopLeft" size={23} />
+            <Text>Workspace</Text>
+          </Link>
+        )}
       </Row>
     </Page>
   )

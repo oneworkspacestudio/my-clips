@@ -19,7 +19,9 @@ Page Shell
       Icon name=Settings2
       Text "Settings"
     If condition=$workspace
-      Link href=$workspace variant=ecosystem "↖ One Workspace"
+      Link href=$workspace variant=ecosystem workspaceApps=true aria-label="Open Workspace apps"
+        Icon name=PanelsTopLeft size=23
+        Text "Workspace"
     Text variant=footnote "Your server. Your creativity."
     Text variant=footnote $versionText
   Stack variant=workspace
@@ -39,3 +41,7 @@ Page Shell
       Link href=$item.href variant=$item.variant aria-label=$item.title
         Icon name=$item.icon size=23
         Text $item.title
+    If condition=$workspace
+      Link href=$workspace variant=nav workspaceApps=true aria-label="Open Workspace apps"
+        Icon name=PanelsTopLeft size=23
+        Text "Workspace"

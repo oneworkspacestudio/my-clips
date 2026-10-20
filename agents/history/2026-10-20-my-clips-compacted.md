@@ -62,3 +62,16 @@ wrapper has no remote. Preserve four unrelated untracked suite history files.
 Synthetic Chrome/native fixtures were stopped and removed from the named C
 cache; build artifacts remain on I. Use normal owner update/recovery operations,
 never owner state as a fixture. Final evidence is docs/RELEASE-ACCEPTANCE.json.
+
+Navigation follow-up: user screenshot shows the shared floating launcher covering
+For You on phones. Clips3 adds an explicit navigation link in the mobile bar and
+sidebar; six mobile targets fit down to320px. Workspace52 enhances marked links
+into picker controls and hides only its floating toggle while a visible native
+trigger exists. Normal href remains a fallback. AUI regenerated; shared adapter
+handles keyboard activation, Escape/focus return, resize and SPA replacement.
+Chrome regression with real built UI/shared assets and synthetic API data passed
+320/360/390/600/768/1024px, all five app tabs, picker, reload and fallback return.
+Screenshot docs/screenshots/workspace-mobile.png visually reviewed. Android2
+WebView uses updated server UI; no new native client or physical-device claim.
+Release packaging and normal backed-up local update are pending. Tooling:
+I:/Projects/tooling/clips-navigation-20261020. Preserve published2/51 artifacts.
