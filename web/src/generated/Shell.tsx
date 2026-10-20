@@ -9,26 +9,28 @@ export function Shell({ data, onAction }: { data: any; onAction: (name: string) 
           <Image src={data.logo} alt="My Clips" width={38} height={38} />
           <Heading level={2}>My Clips</Heading>
         </Link>
-        <Row variant="searchbox">
-          <Icon name="Search" />
-          <Input name="search" placeholder="Search clips & people" onClick={() => onAction("search")} />
-        </Row>
-        {data.nav.map((item, i) => (
-          <Link key={i} href={item.href} variant={item.variant}>
-            <Icon name={item.icon} size={25} />
-            <Text>{item.title}</Text>
+        <Stack variant="sidebar-content">
+          <Row variant="searchbox">
+            <Icon name="Search" />
+            <Input name="search" placeholder="Search clips & people" onClick={() => onAction("search")} />
+          </Row>
+          {data.nav.map((item, i) => (
+            <Link key={i} href={item.href} variant={item.variant}>
+              <Icon name={item.icon} size={25} />
+              <Text>{item.title}</Text>
+            </Link>
+          ))}
+          <Divider />
+          <Button variant="create" onClick={() => onAction("create")}>
+            <Icon name="Plus" />
+            <Text>Upload</Text>
+          </Button>
+          <Spacer />
+          <Link href="#settings" variant="nav">
+            <Icon name="Settings2" />
+            <Text>Settings</Text>
           </Link>
-        ))}
-        <Divider />
-        <Button variant="create" onClick={() => onAction("create")}>
-          <Icon name="Plus" />
-          <Text>Upload</Text>
-        </Button>
-        <Spacer />
-        <Link href="#settings" variant="nav">
-          <Icon name="Settings2" />
-          <Text>Settings</Text>
-        </Link>
+        </Stack>
         {data.workspace && (
           <Link href={data.workspace} variant="ecosystem" workspaceApps={true} aria-label="Open Workspace apps">
             <Icon name="PanelsTopLeft" size={23} />

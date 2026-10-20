@@ -35,13 +35,13 @@ test('integrated Workspace navigation never covers phone tabs',async({page})=>{
   if(relative==='index.html')body=body.toString().replace('</body>','<script defer src="/_workspace/navigation.js"></script></body>');
   return route.fulfill({body,contentType:types[path.extname(file)]||'application/octet-stream'});
  });
- await page.setViewportSize({width:390,height:844});
+ await page.setViewportSize({width:390,height:740});
  await page.goto('http://navigation.test/clips/');
  await expect(page.getByRole('heading',{name:'A little moment. A whole story.'})).toBeVisible();
  const floating=page.locator('#one-workspace-nav').getByRole('button',{name:'Open Workspace apps'});
  const trigger=page.locator('[data-workspace-apps-trigger]:visible');
  for(const width of [320,360,390,600,768,1024]){
-  await page.setViewportSize({width,height:844});
+  await page.setViewportSize({width,height:740});
   await expect(trigger).toHaveCount(1);
   await expect(floating).toBeHidden();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -61,7 +61,7 @@ test('integrated Workspace navigation never covers phone tabs',async({page})=>{
   await page.keyboard.press('Escape');
   await expect(trigger).toBeFocused();
  }
- await page.setViewportSize({width:390,height:844});
+ await page.setViewportSize({width:390,height:740});
  for(const [label,hash] of [['For You','#home'],['Explore','#explore'],['Create','#create'],['Inbox','#inbox'],['Profile','#profile']]){
   await page.locator('.row--bottomnav').getByRole('link',{name:label,exact:true}).click();
   await expect.poll(()=>new URL(page.url()).hash).toBe(hash);

@@ -3,21 +3,22 @@ Page Shell
     Link href="#home" variant=brand
       Image src=$logo alt="My Clips" width=38 height=38
       Heading level=2 "My Clips"
-    Row variant=searchbox
-      Icon name=Search
-      Input name=search placeholder="Search clips & people" action=search
-    For each=$nav
-      Link href=$item.href variant=$item.variant
-        Icon name=$item.icon size=25
-        Text $item.title
-    Divider
-    Button variant=create action=create
-      Icon name=Plus
-      Text "Upload"
-    Spacer
-    Link href="#settings" variant=nav
-      Icon name=Settings2
-      Text "Settings"
+    Stack variant=sidebar-content
+      Row variant=searchbox
+        Icon name=Search
+        Input name=search placeholder="Search clips & people" action=search
+      For each=$nav
+        Link href=$item.href variant=$item.variant
+          Icon name=$item.icon size=25
+          Text $item.title
+      Divider
+      Button variant=create action=create
+        Icon name=Plus
+        Text "Upload"
+      Spacer
+      Link href="#settings" variant=nav
+        Icon name=Settings2
+        Text "Settings"
     If condition=$workspace
       Link href=$workspace variant=ecosystem workspaceApps=true aria-label="Open Workspace apps"
         Icon name=PanelsTopLeft size=23

@@ -75,3 +75,8 @@ Screenshot docs/screenshots/workspace-mobile.png visually reviewed. Android2
 WebView uses updated server UI; no new native client or physical-device claim.
 Release packaging and normal backed-up local update are pending. Tooling:
 I:/Projects/tooling/clips-navigation-20261020. Preserve published2/51 artifacts.
+
+Short-height packaged check exposed an off-screen desktop Workspace footer at
+1024x740. Sidebar menu now scrolls independently, keeping its footer visible.
+The built-UI320–1024px regression passes at740px height after this correction.
+No release assets or source tags had been published for3/52 at discovery.
