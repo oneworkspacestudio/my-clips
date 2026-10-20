@@ -1,0 +1,34 @@
+Page Inbox
+  Stack variant=standard-page
+    Row
+      Heading level=1 "Inbox"
+      Spacer
+      Button action=readAll variant=secondary "Mark all read"
+    Text variant=caption "Likes, comments, follows and messages, as they happen."
+    For each=$events
+      Row variant=notification
+        Icon name=$item.icon
+        Stack
+          Text $item.label
+          Text variant=caption $item.date
+        Spacer
+        Button action=openEvent item=$item.object variant=secondary "Open"
+    Divider
+    Heading level=2 "Messages"
+    Text variant=caption "Private conversations are available between mutual followers."
+    For each=$conversations
+      Button action=message item=$item.peer variant=conversation $item.label
+    If condition=$conversation
+      Card
+        Heading level=2 $conversationTitle
+        For each=$messages
+          Stack variant=$item.variant
+            Text $item.body
+            If condition=$item.href
+              Link href=$item.href "View shared clip"
+            Text variant=caption $item.date
+        Row
+          Input name=message placeholder="Write a message…" action=sendMessage
+          Button action=sendMessage variant=create "Send"
+    If condition=$empty
+      Text variant=empty "You're all caught up."

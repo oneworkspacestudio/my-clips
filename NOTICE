@@ -1,0 +1,10 @@
+My Clips
+Copyright 2026 One Workspace Studio
+
+Original application licensed under Apache License 2.0.
+The shared apphost and semantic UI adapter derive from One Workspace / My PDF,
+Apache-2.0. Video streaming and verified helper setup adapt My Tube (Apache-2.0).
+React, hls.js, fix-webm-duration and Lucide retain their upstream licences.
+Default music jingles by Kenney are CC0; see docs/DEFAULT-MUSIC-LICENSE.txt.
+See THIRD-PARTY-LICENSES.txt in the distribution for resolved dependency licences.
+This application is independent of ByteDance and TikTok.

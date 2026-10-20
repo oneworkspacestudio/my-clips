@@ -1,0 +1,29 @@
+{
+ "name": "@oneworkspacestudio/my-clips",
+ "version": "0.1.0-preview.1",
+ "private": true,
+ "type": "module",
+ "scripts": {
+  "generate": "node scripts/generate.mjs",
+  "build": "npm run generate && tsc --noEmit && vite build && node scripts/offline.mjs",
+  "test:e2e": "playwright test"
+ },
+ "dependencies": {
+  "fix-webm-duration": "1.0.6",
+  "hls.js": "1.6.16",
+  "lucide-react": "0.577.0",
+  "react": "19.3.1",
+  "react-dom": "19.3.1"
+ },
+ "devDependencies": {
+  "@codedia/parser": "0.2.1",
+  "@playwright/test": "1.64.1",
+  "@types/node": "24.0.0",
+  "@types/react": "19.2.14",
+  "@types/react-dom": "19.2.3",
+  "@vitejs/plugin-react": "6.1.2",
+  "sharp": "0.35.5",
+  "typescript": "5.9.3",
+  "vite": "8.3.4"
+ }
+}

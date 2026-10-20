@@ -1,0 +1,26 @@
+Page Browse
+  Stack variant=standard-page
+    Text variant=eyebrow "FIND YOUR NEXT FAVORITE"
+    Heading level=1 $title
+    Row variant=searchbox
+      Icon name=Search
+      Input name=query placeholder="Clips, creators, hashtags" action=doSearch
+      Button action=doSearch variant=secondary "Search"
+    If condition=$empty
+      Text variant=empty "No results yet. Try a different search or post the first clip."
+    Grid columns=3 variant=clip-grid
+      For each=$posts
+        Card variant=clip-tile
+          Link href=$item.href
+            Image src=$item.poster alt=$item.caption
+            Text $item.caption
+            Text variant=caption $item.handle
+    Stack
+      For each=$people
+        Row variant=person
+          Link href=$item.href variant=avatar $item.initials
+          Stack
+            Link href=$item.href $item.handle
+            Text variant=caption $item.bio
+          Spacer
+          Button action=follow item=$item.id variant=secondary $item.followLabel

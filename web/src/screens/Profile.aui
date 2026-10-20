@@ -1,0 +1,38 @@
+Page Profile
+  Stack variant=standard-page
+    Row variant=profile-heading
+      Text variant=profile-avatar $initials
+      Stack
+        Heading level=1 $handle
+        Text $name
+        Row
+          Text $followingText
+          Text $followersText
+          Text $postsText
+        Text $bio
+      Spacer
+      If condition=$own
+        Link href="#settings" variant=button "Edit profile"
+      Else
+        Button action=follow item=$profileID variant=create $followLabel
+        Button action=message item=$profileID variant=secondary "Message"
+        Button action=block item=$profileID variant=icon aria-label="Block account"
+          Icon name=ShieldBan
+    Row variant=tabs
+      Text "Videos"
+      If condition=$own
+        Link href="#saved" "Saved"
+        Link href="#studio" "Studio"
+        Button action=restoreDraft variant=secondary "Open device draft"
+    Grid columns=3 variant=clip-grid
+      For each=$posts
+        Card variant=clip-tile
+          Link href=$item.href
+            Image src=$item.poster alt=$item.caption
+            Text $item.caption
+            Badge $item.state
+    If condition=$empty
+      Stack variant=empty
+        Icon name=Video size=38
+        Heading level=2 "Your moments belong here"
+        Text "Published clips appear on this profile."

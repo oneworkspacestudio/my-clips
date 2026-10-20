@@ -1,0 +1,41 @@
+Page Shell
+  Stack variant=sidebar
+    Link href="#home" variant=brand
+      Image src=$logo alt="My Clips" width=38 height=38
+      Heading level=2 "My Clips"
+    Row variant=searchbox
+      Icon name=Search
+      Input name=search placeholder="Search clips & people" action=search
+    For each=$nav
+      Link href=$item.href variant=$item.variant
+        Icon name=$item.icon size=25
+        Text $item.title
+    Divider
+    Button variant=create action=create
+      Icon name=Plus
+      Text "Upload"
+    Spacer
+    Link href="#settings" variant=nav
+      Icon name=Settings2
+      Text "Settings"
+    If condition=$workspace
+      Link href=$workspace variant=ecosystem "↖ One Workspace"
+    Text variant=footnote "Your server. Your creativity."
+    Text variant=footnote $versionText
+  Stack variant=workspace
+    If condition=$error
+      Alert tone=error $error
+    If condition=$notice
+      Alert tone=success $notice
+    If condition=$offline
+      Alert tone=warning "Offline · your device draft is safe. Reconnect to publish."
+    If condition=$busy
+      Row variant=progress
+        Spinner
+        Text $busy
+    Section id=screen-outlet
+  Row variant=bottomnav
+    For each=$mobileNav
+      Link href=$item.href variant=$item.variant aria-label=$item.title
+        Icon name=$item.icon size=23
+        Text $item.title

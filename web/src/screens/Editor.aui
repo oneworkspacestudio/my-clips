@@ -1,0 +1,123 @@
+Page Editor
+  Stack variant=editor-page
+    Row variant=page-heading
+      Button action=closeEditor variant=icon aria-label="Close editor"
+        Icon name=ArrowLeft
+      Stack
+        Text variant=eyebrow "CREATE SOMETHING YOU"
+        Heading level=1 "Your next clip"
+      Spacer
+      Button action=saveDraft variant=secondary "Save draft"
+    Row variant=stepper
+      Text "01  Capture"
+      Icon name=ChevronRight size=16
+      Text "02  Make it yours"
+      Icon name=ChevronRight size=16
+      Text "03  Share"
+    Grid variant=editor-grid columns=2
+      Stack variant=preview-column
+        Section id=editor-preview
+        Row
+          Button action=record variant=secondary "Record"
+          Field label="Add clips"
+            Input name=files type=file accept="video/mp4,video/webm" multiple=true
+        For each=$clips
+          Row variant=clip-row
+            Button action=selectClip item=$item.key variant=$item.variant $item.name
+            Text variant=caption $item.durationLabel
+            Button action=clipUp item=$item.key variant=icon aria-label="Move clip earlier"
+              Icon name=ArrowUp
+            Button action=removeClip item=$item.key variant=icon aria-label="Remove clip"
+              Icon name=X
+        If condition=$noClips
+          Card variant=drop-card
+            Icon name=UploadCloud size=38
+            Heading level=2 "Start with a moment"
+            Text "Choose videos or use your camera. Originals are saved in your protected Drive library."
+        If condition=$remixLabel
+          Alert $remixLabel
+      Stack variant=editing-controls
+        Card
+          Row
+            Icon name=Scissors
+            Heading level=2 "Trim & style"
+            Badge $durationLabel
+          Row
+            Field label="Start (seconds)"
+              Input name=trimStart type=number min=0 step=0.1
+            Field label="End (seconds)"
+              Input name=trimEnd type=number min=0.1 step=0.1
+            Field label="Speed"
+              Select name=speed options=$speeds
+          Row
+            Field label="Filter"
+              Select name=filter options=$filters
+            Checkbox name=flip "Mirror"
+          Button action=applyClip variant=secondary "Apply to selected clip"
+        Card
+          Row
+            Icon name=Music2
+            Heading level=2 "Find your sound"
+          Field label="Soundtrack"
+            Select name=sound options=$soundOptions
+          Section id=sound-preview
+          Row
+            Field label="Sound start (seconds)"
+              Input name=soundStart type=number min=0 step=0.1
+            Field label="Music volume"
+              Input name=soundVolume type=range min=0 max=1 step=0.05
+            Field label="Original volume"
+              Input name=originalVolume type=range min=0 max=1 step=0.05
+          Row
+            Button action=music variant=secondary "My Music library"
+            Button action=voiceover variant=secondary "Record voiceover"
+          Field label="Import your audio"
+            Input name=audioFile type=file accept="audio/*"
+          Checkbox name=audioRights "I have permission to use this audio in my videos"
+          Button action=importAudio variant=secondary "Add selected audio"
+          If condition=$voiceLabel
+            Text $voiceLabel
+          Text variant=caption "Default sounds by Kenney · CC0"
+        Card
+          Row
+            Icon name=Type
+            Heading level=2 "Text & captions"
+          Field label="Text or emoji sticker"
+            Input name=overlayText placeholder="Say something…" multiline=true
+          Row
+            Field label="From (seconds)"
+              Input name=textStart type=number min=0 step=0.1
+            Field label="To (seconds)"
+              Input name=textEnd type=number min=0 step=0.1
+            Field label="Size"
+              Input name=textSize type=number min=16 max=72
+          Row
+            Field label="Horizontal position"
+              Input name=textX type=range min=0 max=1 step=0.05
+            Field label="Vertical position"
+              Input name=textY type=range min=0 max=1 step=0.05
+          Button action=addText variant=secondary "Add timed text"
+          For each=$overlays
+            Row
+              Text $item.label
+              Button action=removeText item=$item.key variant=icon aria-label="Remove text"
+                Icon name=X
+        Card
+          Row
+            Icon name=Send
+            Heading level=2 "Ready when you are"
+          Field label="Caption"
+            Input name=caption placeholder="Describe your clip… #moments" multiline=true
+          Field label="Who can watch"
+            Select name=visibility options=$audiences
+          Row
+            Checkbox name=allowComments "Comments"
+            Checkbox name=allowRemix "Duet & Stitch"
+          Field label="Schedule (optional)"
+            Input name=publishAt type=datetime-local
+          Text variant=caption "Rendering applies your edits and prepares three streaming qualities."
+          Row
+            Button action=renderClip variant=secondary "Render preview"
+            Button action=publishClip variant=create disabled=$cannotPublish "Post clip"
+          If condition=$renderStatus
+            Alert $renderStatus

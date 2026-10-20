@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "app": "clips",
+  "version": "0.1.0-preview.1",
+  "workspaceInstallerIntegration": 1,
+  "route": "/clips",
+  "minimumWorkspaceVersion": "0.3.0-preview.50",
+  "requiredManagerCapabilities": ["scoped-clips-storage-v1"],
+  "storageContract": "quantum-clips-v1",
+  "status": "evaluation-preview"
+}

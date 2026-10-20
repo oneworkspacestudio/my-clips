@@ -1,0 +1,59 @@
+Page Sheet
+  Card variant=dialog
+    Row
+      Heading level=2 $title
+      Spacer
+      Button action=closeSheet variant=icon cancel=true aria-label="Close"
+        Icon name=X
+    If condition=$commentsMode
+      Stack variant=comment-list
+        For each=$comments
+          Row variant=comment
+            Text variant=avatar $item.initials
+            Stack
+              Text variant=creator $item.handle
+              Text $item.body
+      Row
+        Input name=comment placeholder="Add a comment…" action=sendComment
+        Button action=sendComment variant=create "Post"
+    If condition=$moreMode
+      Text $reason
+      Button action=hideClip variant=secondary "Not interested"
+      Button action=duet variant=secondary "Duet"
+      Button action=stitch variant=secondary "Stitch"
+      Button action=report variant=secondary "Report clip"
+      Field label="Report reason"
+        Input name=reportReason placeholder="Tell us what happened"
+      If condition=$owned
+        Button action=archive variant=secondary "Archive"
+        Button action=deleteClip variant=danger "Delete clip"
+    If condition=$musicMode
+      Text "Choose a sound from your signed-in My Music library."
+      Link href="/_workspace/open/music" external=true "Open My Music to sign in"
+      Row
+        Input name=musicQuery placeholder="Search your music…" action=searchMusic
+        Button action=searchMusic variant=secondary "Search"
+      Checkbox name=audioRights "I have permission to use this music in my videos"
+      For each=$music
+        Row
+          Stack
+            Text $item.title
+            Text variant=caption $item.artist
+          Button action=chooseMusic item=$item.key variant=secondary "Use sound"
+    If condition=$cameraMode
+      Section id=camera-preview
+      Text $recordStatus
+      Row
+        Button action=startCamera variant=secondary "Enable camera"
+        Button action=switchCamera variant=secondary "Flip"
+        Checkbox name=recordAudio "Microphone"
+      Row
+        Button action=startRecording variant=create disabled=$recording "Record"
+        Button action=pauseRecording variant=secondary disabled=$notRecording "Pause / resume"
+        Button action=stopRecording variant=secondary disabled=$notRecording "Finish"
+    If condition=$voiceMode
+      Text "Record a voiceover. It starts at the beginning of your clip."
+      Text $recordStatus
+      Row
+        Button action=startVoice variant=create disabled=$recording "Record voiceover"
+        Button action=stopRecording variant=secondary disabled=$notRecording "Finish"

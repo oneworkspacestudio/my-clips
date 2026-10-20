@@ -1,0 +1,23 @@
+Page Live
+  Stack variant=standard-page
+    Text variant=eyebrow "IN THE MOMENT"
+    Heading level=1 "LIVE"
+    If condition=$active
+      Section id=live-player
+      Alert $status
+      Button action=endLive variant=danger "Leave live"
+    Else
+      Card
+        Heading level=2 "Go live with your community"
+        Text "Share your camera and microphone with up to 8 viewers. Internet connections may need your server's TURN configuration."
+        Field label="Live title"
+          Input name=liveTitle placeholder="What’s happening?"
+        Button action=startLive variant=create "Go LIVE"
+      For each=$rooms
+        Card
+          Badge tone=accent "LIVE"
+          Heading level=2 $item.title
+          Text $item.handle
+          Button action=joinLive item=$item.id variant=secondary "Watch live"
+      If condition=$empty
+        Text variant=empty "No one is live right now."

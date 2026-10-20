@@ -1,0 +1,46 @@
+Page Feed
+  Row variant=feed-tabs
+    Link href="#following" variant=$followingClass "Following"
+    Link href="#friends" variant=$friendsClass "Friends"
+    Link href="#home" variant=$homeClass "For You"
+    Spacer
+    Link href="#explore" variant=icon aria-label="Search"
+      Icon name=Search
+  If condition=$empty
+    Stack variant=empty-feed
+      Icon name=Clapperboard size=58
+      Text variant=eyebrow "MAKE THE FIRST MOVE"
+      Heading level=1 "A little moment. A whole story."
+      Text "Record something, add your sound, and make this space yours."
+      Button action=create variant=create "Create your first clip"
+      Text variant=caption "Up to 3 minutes · Your videos stay on your server"
+  Stack variant=feed-scroll
+    For each=$posts
+      Card variant=video-card
+        Section id=feed-player item=$item
+        Stack variant=video-caption
+          Link href=$item.profileURL variant=creator $item.handle
+          Text $item.caption
+          Text variant=soundline $item.soundLabel
+          Text variant=reason $item.reason
+        Stack variant=video-actions
+          Button action=profile item=$item.owner variant=avatar aria-label="View creator" $item.initials
+          Button action=like item=$item.id variant=$item.likeClass aria-label="Like clip"
+            Icon name=Heart size=29
+            Text $item.likes
+          Button action=comments item=$item.id variant=round-action aria-label="Comments"
+            Icon name=MessageCircle size=29
+            Text $item.comments
+          Button action=save item=$item.id variant=$item.saveClass aria-label="Save clip"
+            Icon name=Bookmark size=27
+            Text "Save"
+          Button action=share item=$item.id variant=round-action aria-label="Share clip"
+            Icon name=Share2 size=27
+            Text "Share"
+          Button action=more item=$item.id variant=round-action aria-label="More options"
+            Icon name=Ellipsis size=27
+  If condition=$hasPosts
+    Row variant=feed-hint
+      Icon name=Mouse size=16
+      Text "Scroll to explore"
+      Text "↑ ↓"

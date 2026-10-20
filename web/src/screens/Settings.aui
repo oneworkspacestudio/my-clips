@@ -1,0 +1,65 @@
+Page Settings
+  Stack variant=standard-page
+    Heading level=1 "Settings & privacy"
+    Card
+      Heading level=2 "Your profile"
+      Field label="Handle"
+        Input name=handle
+      Field label="Bio"
+        Input name=bio multiline=true
+      Checkbox name=private "Private account — approve new followers"
+      Button action=profileSave "Save profile"
+    Card
+      Heading level=2 "Notifications"
+      Text "Push requires HTTPS and browser support. On iPhone or iPad, install My Clips on your Home Screen first."
+      Checkbox name=push "Enable private push notifications"
+      Row
+        Field label="Quiet hours start (server time)"
+          Input name=quietStart type=time
+        Field label="Quiet hours end (server time)"
+          Input name=quietEnd type=time
+      Button action=pushSave "Save notifications"
+      Button action=testPush variant=secondary "Send test notification"
+    Card
+      Heading level=2 "Install My Clips"
+      Text "Add this app to your Home Screen for an app-like experience. On iOS, use Share → Add to Home Screen."
+      Button action=install variant=secondary "Install / show instructions"
+      If condition=$nativeAndroid
+        Link href="myclips://settings" variant=button "Android connection & notifications"
+      Button action=updateApp variant=secondary "Apply available update"
+    Card
+      Heading level=2 "People & privacy"
+      For each=$relations
+        Row
+          Text $item.label
+          Button action=approve item=$item.actor variant=secondary "Approve request"
+          Button action=reject item=$item.actor variant=secondary "Remove / reject"
+      Button action=export variant=secondary "Export my account & originals"
+      Button action=logout variant=secondary "Sign out"
+      Text "Disable this My Clips account and hide its posts. Protected originals remain for server retention and backups; your MyAccounts identity stays active."
+      Field label="Type DELETE MY CLIPS ACCOUNT to confirm"
+        Input name=deleteConfirmation autocomplete=off
+      Button action=deleteAccount variant=danger "Disable My Clips account"
+    If condition=$owner
+      Card
+        Heading level=2 "Community moderation"
+        For each=$reports
+          Row
+            Text $item.reason
+            Button action=removeReport item=$item.id variant=danger "Remove content"
+            Button action=dismissReport item=$item.id variant=secondary "Dismiss"
+    Card
+      Heading level=2 "Your feed"
+      Text "Recommendations learn from watches, skips, follows and hashtags. You can start fresh any time."
+      Button action=resetFeed variant=secondary "Reset recommendations"
+      Field label="Playback quality"
+        Select name=quality options=$qualities
+      Checkbox name=dataSaver "Data saver"
+      Button action=savePlayback variant=secondary "Save playback preferences"
+    Card
+      Heading level=2 "Connected services"
+      Text $storageText
+      Text $videoText
+      Text "Default sounds by Kenney · CC0. My Music selections use your signed-in library access."
+      Link href="https://kenney.nl/assets/music-jingles" external=true "Music credits"
+      Text variant=caption $identityText
