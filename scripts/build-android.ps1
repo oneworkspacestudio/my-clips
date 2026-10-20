@@ -28,9 +28,9 @@ python "$root/scripts/package-apk.py"
 if($LASTEXITCODE){throw 'APK packaging failed'}
 & "$tools/zipalign.exe" -f -p 4 "$Out/unsigned.apk" "$Out/aligned.apk"
 if($LASTEXITCODE){throw 'APK alignment failed'}
-& "$tools/apksigner.bat" sign --ks $KeyStore --ks-key-alias $KeyAlias --ks-pass env:MYCLIPS_SIGNING_PASSWORD --key-pass env:MYCLIPS_SIGNING_PASSWORD --out "$Out/MyClips-0.1.0-preview.1.apk" "$Out/aligned.apk"
+& "$tools/apksigner.bat" sign --ks $KeyStore --ks-key-alias $KeyAlias --ks-pass env:MYCLIPS_SIGNING_PASSWORD --key-pass env:MYCLIPS_SIGNING_PASSWORD --out "$Out/MyClips-0.1.0-preview.2.apk" "$Out/aligned.apk"
 if($LASTEXITCODE){throw 'APK signing failed'}
-& "$tools/apksigner.bat" verify --verbose --print-certs "$Out/MyClips-0.1.0-preview.1.apk"
+& "$tools/apksigner.bat" verify --verbose --print-certs "$Out/MyClips-0.1.0-preview.2.apk"
 if($LASTEXITCODE){throw 'APK signature verification failed'}
-& "$tools/aapt2.exe" dump badging "$Out/MyClips-0.1.0-preview.1.apk"
+& "$tools/aapt2.exe" dump badging "$Out/MyClips-0.1.0-preview.2.apk"
 if($LASTEXITCODE){throw 'APK metadata validation failed'}

@@ -40,7 +40,14 @@ Android v3 signature and metadata verified, physical phone offline; emulator
 image installation in task-owned I tooling is underway. SDK35 host directories
 were placeholders, not usable system images. Keys live outside repositories.
 
-Next: finish exact-package acceptance, publish new My Clips1 and Workspace50,
+Next: finish exact-package acceptance, publish new My Clips1 and Workspace51,
 verify public asset hashes, normal backed-up owner update, scoped fixture cleanup,
 then append final source/release references and synchronize local source clones.
 No current My Clips source commit, GitHub release or owner update yet.
+
+Held candidates: source tags My Clips1/Workspace50 were pushed, but neither was
+released. A populated native My Music test caught filepath.Join backslashes
+passed to path.Dir in writeRoot, preventing audio parent directory creation.
+Fix uses filepath.Dir(filepath.FromSlash(...)); native-path/no-overwrite/escape
+regression added. Supersede with Clips2/Workspace51, retaining held source tags.
+Workspace50 draft418675057 was deleted before publication. No owner update yet.

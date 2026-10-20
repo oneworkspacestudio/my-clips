@@ -25,6 +25,30 @@ type fixture struct {
 	users   map[string]string
 }
 
+func TestWriteRootNativeNestedPaths(t *testing.T) {
+	base := t.TempDir()
+	root, e := os.OpenRoot(base)
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer root.Close()
+	rel := filepath.Join("users", "synthetic", "sounds", "import.mp3")
+	want := []byte("synthetic audio bytes")
+	if e := writeRoot(root, rel, want); e != nil {
+		t.Fatal(e)
+	}
+	got, e := root.ReadFile(rel)
+	if e != nil || !bytes.Equal(got, want) {
+		t.Fatal("native nested media path did not preserve bytes", e)
+	}
+	if e := writeRoot(root, rel, []byte("overwrite")); e == nil {
+		t.Fatal("existing original overwritten")
+	}
+	if e := writeRoot(root, filepath.Join("..", "escape.mp3"), want); e == nil {
+		t.Fatal("root escape accepted")
+	}
+}
+
 func setup(t *testing.T) *fixture {
 	t.Helper()
 	root := t.TempDir()

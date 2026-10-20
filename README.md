@@ -33,7 +33,7 @@ Google Drive; “Drive” here is the ecosystem's native My Drive.
 
 Download [the release](https://github.com/oneworkspacestudio/my-clips/releases).
 For integrated sign-in, My Drive and My Music, install
-[One Workspace 0.3.0-preview.50 or later](https://github.com/oneworkspacestudio/one-workspace/releases).
+[One Workspace 0.3.0-preview.51 or later](https://github.com/oneworkspacestudio/one-workspace/releases).
 Open **My Clips** in the app picker, or `/clips/`.
 
 Standalone Windows:
@@ -53,7 +53,7 @@ FFprobe helper archive on supported Windows hosts. You can instead set
 `MYCLIPS_AUTO_HELPERS=false` disables automatic helper acquisition.
 Helpers are separately obtained upstream software, not included in the app ZIP.
 
-On Android 9 or later, install `MyClips-0.1.0-preview.1.apk` and enter your
+On Android 9 or later, install `MyClips-0.1.0-preview.2.apk` and enter your
 Workspace HTTPS address. The native client supplies camera/microphone permission
 handling, system file selection and optional private activity notifications.
 Browser/PWA and Android use the same server account and videos.

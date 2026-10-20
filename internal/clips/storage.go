@@ -274,7 +274,7 @@ func (a *App) upload(w http.ResponseWriter, r *http.Request) {
 	apphost.JSON(w, 201, m)
 }
 func writeRoot(root *os.Root, rel string, b []byte) error {
-	if e := root.MkdirAll(filepath.FromSlash(path.Dir(rel)), 0700); e != nil {
+	if e := root.MkdirAll(filepath.Dir(filepath.FromSlash(rel)), 0700); e != nil {
 		return e
 	}
 	f, e := root.OpenFile(filepath.FromSlash(rel), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
