@@ -70,6 +70,22 @@ func TestLiveMembershipAndMutualMessageBoundary(t *testing.T) {
 	if w = f.call("GET", "/api/live/"+id+"/signals", "alice", nil); w.Code != 200 {
 		t.Fatal(w.Code)
 	}
+	var heartbeat struct{ Peers []string }
+	w = f.call("POST", "/api/live/"+id+"/heartbeat", "alice", map[string]any{})
+	json.Unmarshal(w.Body.Bytes(), &heartbeat)
+	if len(heartbeat.Peers) != 1 {
+		t.Fatal("live peer missing from broadcaster heartbeat")
+	}
+	f.call("POST", "/api/profiles/"+f.users["bob"]+"/relations", "alice", map[string]any{"kind": "block", "enabled": true})
+	w = f.call("POST", "/api/live/"+id+"/heartbeat", "alice", map[string]any{})
+	json.Unmarshal(w.Body.Bytes(), &heartbeat)
+	if len(heartbeat.Peers) != 0 {
+		t.Fatal("blocked viewer remains authorized for live media")
+	}
+	if w = f.call("POST", "/api/live/"+id+"/heartbeat", "bob", map[string]any{}); w.Code != 404 {
+		t.Fatal("blocked live heartbeat accepted")
+	}
+	f.call("POST", "/api/profiles/"+f.users["bob"]+"/relations", "alice", map[string]any{"kind": "block", "enabled": false})
 	f.call("POST", "/api/live/"+id+"/end", "alice", map[string]any{})
 	if w = f.call("GET", "/api/live/"+id+"/signals", "bob", nil); w.Code != 404 {
 		t.Fatal("ended live signaling")

@@ -76,6 +76,27 @@ func (a *App) liveHeartbeat(w http.ResponseWriter, r *http.Request) {
 	}
 	if owner == uid(r) {
 		a.H.DB.Exec("UPDATE live_rooms SET updated=? WHERE id=?", a.now().Unix(), r.PathValue("id"))
+		rows, e := a.H.DB.Query("SELECT user_id FROM live_peers WHERE room=? AND updated>?", r.PathValue("id"), a.now().Unix()-90)
+		if e != nil {
+			a.fail(w, e)
+			return
+		}
+		candidates := []string{}
+		for rows.Next() {
+			var user string
+			if rows.Scan(&user) == nil {
+				candidates = append(candidates, user)
+			}
+		}
+		rows.Close()
+		authorized := []string{}
+		for _, user := range candidates {
+			if _, ok := a.liveRoom(r.PathValue("id"), user); ok {
+				authorized = append(authorized, user)
+			}
+		}
+		apphost.JSON(w, 200, map[string]any{"ok": true, "peers": authorized})
+		return
 	} else {
 		a.H.DB.Exec("UPDATE live_peers SET updated=? WHERE room=? AND user_id=?", a.now().Unix(), r.PathValue("id"), uid(r))
 	}

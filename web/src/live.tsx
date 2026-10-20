@@ -23,7 +23,10 @@ export function LiveView({request,user,fields,setField,onError}:any){
  const poll=async()=>{
   if(polling.current||!room.current)return;polling.current=true;
   try{
-   await post('/api/live/'+room.current+'/heartbeat');
+   const heartbeat=await post('/api/live/'+room.current+'/heartbeat');
+   if(owner.current===user.id&&Array.isArray(heartbeat.peers)){
+    for(const [id,p] of peers.current)if(!heartbeat.peers.includes(id)){p.close();peers.current.delete(id);queues.current.delete(id)}
+   }
    const events=await request('/api/live/'+room.current+'/signals?after='+after.current);
    for(const e of events){
     if(!room.current||!alive.current)break;after.current=Math.max(after.current,e.id);const p=peer(e.sender),data=e.body;
@@ -33,7 +36,7 @@ export function LiveView({request,user,fields,setField,onError}:any){
      if(data.sdp.type==='offer'&&owner.current===user.id){await p.setLocalDescription(await p.createAnswer());await signal(e.sender,{sdp:p.localDescription})}
     }else if(data.candidate){if(p.remoteDescription)await p.addIceCandidate(data.candidate);else queues.current.set(e.sender,[...(queues.current.get(e.sender)||[]),data.candidate])}
    }
-  }catch(e:any){setStatus('Live is unavailable: '+e.message)}finally{polling.current=false}
+  }catch(e:any){close();onError('Live is unavailable: '+e.message)}finally{polling.current=false}
  };
  useEffect(()=>{alive.current=true;request('/api/live').then(setRooms).catch((e:any)=>onError(e.message));const pause=()=>{if(document.hidden&&local.current)close()};document.addEventListener('visibilitychange',pause);return()=>{alive.current=false;close();document.removeEventListener('visibilitychange',pause)}},[]);
  const action=async(name:string)=>{try{
