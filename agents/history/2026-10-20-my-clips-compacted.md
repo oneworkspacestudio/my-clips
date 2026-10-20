@@ -1,53 +1,64 @@
-# My Clips — implementation in progress
+# My Clips delivery
 
-User requests a standalone TikTok-style Windows EXE and Android app, familiar
-UI and creation flows, Drive-backed original videos, optimized streaming,
-My Music selection/default open music, notifications and recommendations.
-Local installation, source pushes and GitHub releases are authorized.
+User authorized a standalone TikTok-style Windows EXE and Android app, Drive
+originals/streaming, editor, My Music/default music, notifications, recommendations,
+local installation, GitHub pushes and releases. No subagents used. Original
+Apache-2.0 app uses owned My Social/apphost and My Tube foundations. Loops and
+PeerTube were evaluated; neither fits the portable Go ecosystem directly. AUI
+owns screen trees. No TikTok code or branding is used.
 
-Source I:/Projects/my-clips is a new original Apache-2.0 app based on the owned
-My Social apphost/social foundation. Streaming algorithms are adapted from
-owned My Tube. Upstream Loops (PHP/Laravel/Redis, AGPL) and PeerTube were researched;
-neither supplies the existing portable Go/Drive/MyAccounts integration.
-No TikTok code, branding, licensed catalog or proprietary ranking is included.
-Use AUI for screen trees. No subagents authorized or used.
+Delivered My Clips v0.1.0-preview.2, code ece6f31ecacb666a2b2038c96ed85dd0749612f3,
+public release418689751 with16 assets. All asset sizes/SHA256 and source tag
+verified; anonymous full Windows ZIP hash:
+909df8660dc908993e5b87b8beb5ea2fba4eac9173e90adf4687759a2ba8cfe3.
+Workspace v0.3.0-preview.51, code2a4f6c377da999191445203379e2938a5451af1c,
+public release418691777 with22 assets; all remote digests verified. Full bundle
+has22 apps/109 verified payloads and preserves21 published49 component pins.
+Anonymous installer/bundle Range206 checks pass. Published tags/assets are
+immutable; later documentation commits must not rebuild or replace them.
 
-Suite source I:/Projects/one-workspace is now d5b472b after another task
-published Workspace49/Chat10. Owner still runs48/Social2; reconcile again before
-update. Preserve all component pins and unrelated history files. New private
-Drive source must use physical per-account scopes outside broad Files sources.
-Never use the owner installation as a development fixture.
+Authorized owner update48-to51 completed through the normal backed-up updater.
+Workspace51/Clips2 binaries match public digests. All21 existing app versions and
+packages, accounts, identities and paths are preserved;22 apps installed.
+All21 health entries (including Cloudflare) run; Clips health reports preview2.
+Public /clips/ HTML requests redirect303 to sign-in. Recovery manifest SHA256
+verified and journal complete at2026-10-20T18:02:36Z. Preserve the newest verified
+rollback; normal updater removed one older verified backup. Owner data was never
+a development fixture.
 
-Artifacts I:/Projects/tooling/my-clips-20261020. Synthetic protected state only
-C:/Projects/.cache/my-clips-20261020, currently no fixtures running. Android SDK
-35/36, build tools36 and Java21 exist. Connected device reported offline;
-no physical-device installation or acceptance claimed. Build and test locally
-before immutable release; normal backed-up suite updater for owner install.
-Existing latest owner recovery must be preserved until updater replaces it.
+Go tests/vet, dependency verification, TypeScript/AUI/Vite build and npm audit
+passed locally. Exact packaged Chrome checks cover upload/edit/draft/render,
+three-tier HLS, MP4 Range, audience/original privacy, simulated1.2Mbps playback,
+mobile layout, real synthetic MediaRecorder and two-session WebRTC.
+Native four-app51 test validates actual My Music OIDC/index/search/rights-confirmed
+audio import, single sign-in and private original byte identity through Clips
+and native Drive. Cross-account, broad-source, case and traversal access denied.
+Published49-to51 synthetic backed-up update preserves identity, paths, ordinary
+bytes, Accounts/Drive packages and19 opt-outs. No GitHub Actions run was required.
 
-Implementation now includes the original AUI vertical feed/editor, structured video
-rendering and adaptive HLS, CC0 sounds and authorized My Music routes, mutual
-messages, transparent ranking, private scopes, Web Push, real small WebRTC rooms,
-and signed Android client. Go tests and the actual Chrome synthetic upload/edit/
-draft/render/private/HLS/range/capture/live/mobile workflow pass. Revoking remix
-source permissions denies dependent derivatives. Full parity remains explicitly
-incomplete; see docs/FEATURES.md and ACCEPTANCE.md.
+Candidate1 exposed a Windows nested-path audio-write bug; fixed using
+filepath.Dir(filepath.FromSlash(...)), with containment/write-once regression.
+Fresh live heartbeats revoke peers whose audience permission is withdrawn.
+Held Clips1/Workspace50 tags remain unchanged; neither has a public release or
+was installed in the owner suite. Workspace50 draft418675057 was deleted.
 
-Native sign-in and exact original bytes through both app and own physical Drive
-scope passed, including case/traversal/other-account denials; final harness rerun
-records the acceptance JSON after fixing its alphabetical list expectation.
-Android v3 signature and metadata verified, physical phone offline; emulator
-image installation in task-owned I tooling is underway. SDK35 host directories
-were placeholders, not usable system images. Keys live outside repositories.
+Signed Android2 APK metadata/alignment/v3 signature verified, Android9+.
+Physical phone remained offline; isolated emulator did not reach ADB readiness.
+Only task-owned emulator processes/registration were removed. Do not claim
+physical installation, Android runtime or push-delivery acceptance. Signing keys
+remain outside Git. APK and Windows downloads are in the user's builds folder.
 
-Next: finish exact-package acceptance, publish new My Clips1 and Workspace51,
-verify public asset hashes, normal backed-up owner update, scoped fixture cleanup,
-then append final source/release references and synchronize local source clones.
-No current My Clips source commit, GitHub release or owner update yet.
+Working preview; full TikTok parity is incomplete. Ranking is a local transparent
+heuristic, not proprietary TikTok ML. Commercial music, face AR, auto captions,
+Shop/coins/gifts/ads/payments and large live infrastructure are absent. Live is
+an eight-viewer WebRTC mesh; external TURN, production load, clean-host restore
+and independent security review remain unverified. Account DISABLE retains
+originals for operator retention. See docs/FEATURES.md and ACCEPTANCE.md.
 
-Held candidates: source tags My Clips1/Workspace50 were pushed, but neither was
-released. A populated native My Music test caught filepath.Join backslashes
-passed to path.Dir in writeRoot, preventing audio parent directory creation.
-Fix uses filepath.Dir(filepath.FromSlash(...)); native-path/no-overwrite/escape
-regression added. Supersede with Clips2/Workspace51, retaining held source tags.
-Workspace50 draft418675057 was deleted before publication. No owner update yet.
+Canonical app I:/Projects/my-clips; suite I:/Projects/one-workspace.
+Builds and sanitized receipts: I:/Projects/tooling/my-clips-20261020.
+User workspace my-clips/ and one-workspace/ are synchronized clones; the parent
+wrapper has no remote. Preserve four unrelated untracked suite history files.
+Synthetic Chrome/native fixtures were stopped and removed from the named C
+cache; build artifacts remain on I. Use normal owner update/recovery operations,
+never owner state as a fixture. Final evidence is docs/RELEASE-ACCEPTANCE.json.

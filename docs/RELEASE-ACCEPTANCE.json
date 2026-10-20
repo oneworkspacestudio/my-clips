@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "app": "0.1.0-preview.2",
+  "codeCommit": "ece6f31ecacb666a2b2038c96ed85dd0749612f3",
+  "publishedRelease": {
+    "id": 418689751,
+    "tag": "v0.1.0-preview.2",
+    "commit": "ece6f31ecacb666a2b2038c96ed85dd0749612f3",
+    "assets": 16,
+    "allSizesAndSHA256Match": true,
+    "published": true,
+    "url": "https://github.com/oneworkspacestudio/my-clips/releases/tag/v0.1.0-preview.2"
+  },
+  "anonymousZip": {
+    "matchesTestedPackage": true,
+    "sha256": "909df8660dc908993e5b87b8beb5ea2fba4eac9173e90adf4687759a2ba8cfe3",
+    "anonymousDownload": true,
+    "version": "0.1.0-preview.2"
+  },
+  "windowsExeSHA256": "596ff29acc9b6495d54b2c50602e206986952a2cde585ff61453d140e23ab71c",
+  "apkSHA256": "ee6df75b2edb14273e73c36f7bd9cadcb193ac2f29abf88219afe8ed5300f121",
+  "apkCertificateSHA256": "1259622d59e10c59a7756f383aae7dc5d22078022f4b36401b05a5a66e3c85e3",
+  "chromePackagedFlowPassed": true,
+  "nativeMusic": {
+    "schema": 1,
+    "workspace": "0.3.0-preview.51",
+    "clips": "0.1.0-preview.2",
+    "checks": [
+      "actual My Music OIDC, indexed synthetic CC0 track, browser search/rights-confirmed import, owner sound API",
+      "fresh isolated Windows installer",
+      "four selected apps",
+      "MyAccounts once then Clips OIDC",
+      "guarded Quantum storage connected",
+      "private original video uploaded",
+      "original byte identity",
+      "Drive OIDC immutable subject matches",
+      "native own scoped original byte identity",
+      "cross-account traversal and case variants denied",
+      "broad My Drive aliases denied",
+      "Workspace picker"
+    ],
+    "ownerDataUsed": false,
+    "physicalDevice": false
+  },
+  "upgrade": {
+    "schema": 1,
+    "workspace": "0.3.0-preview.51",
+    "clips": "0.1.0-preview.2",
+    "checks": [
+      "published49 to51 normal backed-up update; identity paths original bytes and19 opt-outs preserved",
+      "fresh isolated Windows installer",
+      "three selected apps",
+      "MyAccounts once then Clips OIDC",
+      "guarded Quantum storage connected",
+      "private original video uploaded",
+      "original byte identity",
+      "Drive OIDC immutable subject matches",
+      "native own scoped original byte identity",
+      "cross-account traversal and case variants denied",
+      "broad My Drive aliases denied",
+      "Workspace picker"
+    ],
+    "ownerDataUsed": false,
+    "physicalDevice": false
+  },
+  "androidRuntimeVerified": false,
+  "ownerInstallation": {
+    "workspace": "0.3.0-preview.51",
+    "ownerUsedAsFixture": false,
+    "apps": 22,
+    "publicArtifactDigestsMatched": true,
+    "managerSHA256": "e1bb72a994fb0d394258dcd4a9f4f4f8cbb91e616cc113f16c04ca9db0c2fc6b",
+    "normalBackedUpUpdater": true,
+    "previousWorkspace": "0.3.0-preview.48",
+    "healthVerified": true,
+    "clipsSHA256": "596ff29acc9b6495d54b2c50602e206986952a2cde585ff61453d140e23ab71c",
+    "existing21AppVersionsAndPackagesPreserved": true,
+    "identityAndPathsPreserved": true,
+    "schema": 1,
+    "clips": "0.1.0-preview.2",
+    "recovery": {
+      "manifestSHA256": "9bb5a1b2212706f0eee89c21d0bc8d221d742bff85394749840fb08c70dd817b",
+      "verified": true,
+      "created": "2026-10-20T17:55:15.5085848Z",
+      "retained": true
+    },
+    "updateCompletedAt": "2026-10-20T18:02:36.4929883Z",
+    "healthyServiceEntries": 21,
+    "publicHTMLRoute": {
+      "status": 303,
+      "redirect": "MyAccounts sign-in",
+      "verified": true
+    }
+  }
+}

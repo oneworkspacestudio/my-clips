@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "workspace": "0.3.0-preview.51",
+  "clips": "0.1.0-preview.2",
+  "checks": [
+    "actual My Music OIDC, indexed synthetic CC0 track, browser search/rights-confirmed import, owner sound API",
+    "fresh isolated Windows installer",
+    "four selected apps",
+    "MyAccounts once then Clips OIDC",
+    "guarded Quantum storage connected",
+    "private original video uploaded",
+    "original byte identity",
+    "Drive OIDC immutable subject matches",
+    "native own scoped original byte identity",
+    "cross-account traversal and case variants denied",
+    "broad My Drive aliases denied",
+    "Workspace picker"
+  ],
+  "ownerDataUsed": false,
+  "physicalDevice": false
+}

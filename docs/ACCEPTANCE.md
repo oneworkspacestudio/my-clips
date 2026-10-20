@@ -18,12 +18,34 @@ Verified locally:
   case/traversal/broad-source denial. Machine-readable record accompanies release.
 - Android Java/DEX/resource build, alignment, signed v3 APK and package metadata.
 - Default music archive and six selected files have recorded source hashes.
+- Populated native My Music library: OIDC, indexing a synthetic CC0 track,
+  browser search, rights confirmation and imported owner audio.
 
 Not established by these checks: physical Android/iOS camera or push delivery,
 separate-network TURN/live, production load, clean-host recovery, commercial
-music rights, advanced AR/ML or complete TikTok parity. My Music's actual routes
-are used with the browser's own authorization; full populated-library acceptance
-remains a separate integration gate.
+music rights, advanced AR/ML or complete TikTok parity.
 
 The release receipt records any later Android emulator and installer/update
 checks. Screenshots contain only synthetic media.
+
+## Final corrected release
+
+My Clips2 source ece6f31ecacb666a2b2038c96ed85dd0749612f3 passes the full packaged
+Chrome flow again, Windows native-path/write-once/containment regression and
+live audience-revocation regression. The first candidate1 was never released.
+Native Workspace51/MyClips2 passes the four-app Music import and original-scope
+checks; published49-to51 backed-up upgrade preserves identity, paths, ordinary
+bytes, Accounts/Drive packages and19 opt-outs. The two-clip glow graph also runs
+successfully through the configured encoder.
+
+The Android2 APK has a verified v3 signature (Android9+). The physical phone was
+offline. An isolated Android35 emulator was attempted but stopped before ADB
+readiness; no Android runtime/device acceptance is claimed.
+
+Both corrected releases are public with verified asset sizes and SHA256 digests.
+The authorized owner update from Workspace48 to51 installed Clips2, preserved
+the existing21 app versions/packages and identity/paths, and completed with all
+services healthy. Installed binaries match the public release. The latest
+recovery manifest checksum is verified. This installation used the normal
+backed-up updater; acceptance fixtures remained isolated. Machine-readable final
+evidence is in RELEASE-ACCEPTANCE.json.
