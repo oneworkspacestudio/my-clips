@@ -56,3 +56,10 @@ The built UI and shared Workspace52 adapter passed synthetic Chrome layout and
 interaction checks at320–1024px, including six nonoverlapping phone targets,
 all app tabs, picker opening, Escape/focus return and fallback restoration.
 Android client2 serves this updated UI; no new device acceptance is claimed.
+
+## Restart correction in preview4
+
+Repeated startup of an initialized schema3 database now passes, retaining its
+account. A future schema remains rejected without changing its data. All Go
+tests/vet and the frontend build pass. The preview2/3 startup sequencing error
+was found during normal maintenance; owner data was not used as a fixture.

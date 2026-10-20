@@ -80,3 +80,13 @@ Short-height packaged check exposed an off-screen desktop Workspace footer at
 1024x740. Sidebar menu now scrolls independently, keeping its footer visible.
 The built-UI320–1024px regression passes at740px height after this correction.
 No release assets or source tags had been published for3/52 at discovery.
+
+Critical restart correction: backup capacity check rejected owner update before
+changing files. Restart exposed Clips2/3 calling Host.Migrate1 after max schema3,
+which incorrectly trips downgrade rejection. Fix skips completed migrations,
+retains rejection for future schema and tests repeated reopen/account retention.
+Owner database must not be reset or downgraded. Clips3 is public; supersede with4.
+Held Workspace52 draft418787958 was deleted before publication; source tag retained.
+Use final Clips4/Workspace53 and explicitly test already-initialized DB restart.
+Backup space is being recovered using in-place NTFS compression of older backups,
+with full checksums verified, all paths retained and latest rollback untouched.

@@ -28,7 +28,7 @@ type App struct {
 }
 
 func New(h *apphost.Host) (*App, error) {
-	if e := h.Migrate(1, schema); e != nil {
+	if e := migrate(h); e != nil {
 		return nil, e
 	}
 	a := &App{H: h, Root: os.Getenv("MYCLIPS_PHOTOS_ROOT"), Guard: os.Getenv("MYCLIPS_STORAGE_GUARD_URL"), GuardToken: os.Getenv("MYCLIPS_STORAGE_GUARD_TOKEN"), FFmpeg: os.Getenv("MYCLIPS_FFMPEG"), FFprobe: os.Getenv("MYCLIPS_FFPROBE"), now: time.Now, limits: map[string][]time.Time{}}
@@ -45,12 +45,6 @@ func New(h *apphost.Host) (*App, error) {
 	if e := a.recoverJobs(); e != nil {
 		return nil, e
 	}
-	if e := h.Migrate(2, clipsSchema); e != nil {
-		return nil, e
-	}
-	if e := h.Migrate(3, liveSchema); e != nil {
-		return nil, e
-	}
 	if e := a.prepareSounds(); e != nil {
 		return nil, e
 	}
@@ -59,6 +53,25 @@ func New(h *apphost.Host) (*App, error) {
 	}
 	a.routes()
 	return a, nil
+}
+
+func migrate(h *apphost.Host) error {
+	migrations := []string{schema, clipsSchema, liveSchema}
+	var current int
+	if e := h.DB.QueryRow("SELECT coalesce(max(version),0) FROM host_migrations").Scan(&current); e != nil {
+		return e
+	}
+	// Host.Migrate rejects a lower target as a downgrade. Reopening an already
+	// upgraded database must skip completed steps, while newer schemas still fail.
+	if current < 0 || current > len(migrations) {
+		return errors.New("app data needs a newer executable; restore a compatible backup to downgrade")
+	}
+	for version := current + 1; version <= len(migrations); version++ {
+		if e := h.Migrate(version, migrations[version-1]); e != nil {
+			return e
+		}
+	}
+	return nil
 }
 func uid(r *http.Request) string { return apphost.Current(r).User.ID }
 func encode(v any) string        { b, _ := json.Marshal(v); return string(b) }
