@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "workspace": "0.3.0-preview.58",
+  "clips": "0.1.0-preview.6",
+  "threeAppNativePredecessorUpgrade": true,
+  "managedPhotosGuardAndOIDC": true,
+  "identityAndOrdinaryBytesPreserved": true,
+  "priorOriginalBytesPreserved": true,
+  "normalComponentUpdater": true,
+  "threeScreensAtWidths": [
+    320,
+    390,
+    1024
+  ],
+  "noFloatingLauncherOverlap": true,
+  "pickerEscapeAndFocus": true,
+  "automaticPrivatePost": true,
+  "pageErrors": [],
+  "allSelectedServicesHealthy": true,
+  "ownerDataUsedAsFixture": false
+}

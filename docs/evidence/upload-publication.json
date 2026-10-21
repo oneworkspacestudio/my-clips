@@ -1,0 +1,65 @@
+{
+  "repository": "oneworkspacestudio/my-clips",
+  "tag": "v0.1.0-preview.6",
+  "commit": "3ca7dc4f3134df3eebd34fbc99c138afc38392db",
+  "draft": false,
+  "url": "https://github.com/oneworkspacestudio/my-clips/releases/tag/v0.1.0-preview.6",
+  "everyPublishedAssetMatchesLocal": true,
+  "assets": [
+    {
+      "name": "build-info.json",
+      "size": 296,
+      "sha256": "d3bd3626ca99b55faa6abcf15587b44e66699dbefd4dd042c52ed1a6589a8c48"
+    },
+    {
+      "name": "compatibility.json",
+      "size": 324,
+      "sha256": "b0c640b2b53da6aa635dd28bdfad33eef357f3b53b0d7a90966d100087636c8a"
+    },
+    {
+      "name": "LICENSE",
+      "size": 11558,
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "name": "my-clips-0.1.0-preview.6-windows-amd64.zip",
+      "size": 7283392,
+      "sha256": "74f007635ba3303846efeebd4bfd3d9869443dd6ec2603ce0edf365be7224ddc"
+    },
+    {
+      "name": "my-clips-source.zip",
+      "size": 1029826,
+      "sha256": "65f4287e582d31d1d4620ba7ba38a1a1b179e9cdec363e8c8e9fa391a3d97cff"
+    },
+    {
+      "name": "MyClips-0.1.0-preview.2.apk",
+      "size": 37334,
+      "sha256": "ee6df75b2edb14273e73c36f7bd9cadcb193ac2f29abf88219afe8ed5300f121"
+    },
+    {
+      "name": "MyClips.exe",
+      "size": 15836672,
+      "sha256": "f3665c802ddbba64085c620663895a9bfd04c776e66db7056104616bb413de04"
+    },
+    {
+      "name": "NOTICE",
+      "size": 556,
+      "sha256": "a842f941a510aef80ad078cdf28dbb926022220594329ecc059f5cef79e66668"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 870,
+      "sha256": "d490375ca2ab8c3795dbca438249ace40713eebbea1b15c800f4a15ebef83705"
+    },
+    {
+      "name": "THIRD-PARTY-LICENSES.txt",
+      "size": 474821,
+      "sha256": "e129ace97b56e3028818d404daa8f47c0f3e1d596f9a8c848074eb3bc2626836"
+    },
+    {
+      "name": "workspace-update.json",
+      "size": 2122,
+      "sha256": "859c2d7142665f9c1aff71e4ebb8083fc4c925378c6e726178e9e2062cba15bd"
+    }
+  ]
+}

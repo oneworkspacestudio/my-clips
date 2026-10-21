@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "workspace": "0.3.0-preview.58",
+  "clips": "0.1.0-preview.6",
+  "apps": 25,
+  "healthyServices": 24,
+  "allHealthy": true,
+  "onlyClipsComponentUpdated": true,
+  "other24AppContractsAndPackagesPreserved": true,
+  "identityPathsPortsAndSelectionsPreserved": true,
+  "installedChatVersion": "0.1.0-preview.9",
+  "normalBackedUpUpdater": true,
+  "rollbackManifestVerified": true,
+  "clipsSHA256": "f3665c802ddbba64085c620663895a9bfd04c776e66db7056104616bb413de04",
+  "ownerDataUsedAsFixture": false
+}

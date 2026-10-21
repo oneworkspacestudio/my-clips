@@ -55,3 +55,28 @@ compatibility.json remains in the standalone ZIP. The UI code is unchanged.
 Native predecessor setup/guard/OIDC and original upload passed before refusal.
 An initial harness attempt also used unsupported old `gh auth token`; removed
 that call. Anonymous public update discovery works without a token.
+
+
+## Verified delivery
+
+Public preview6 source3ca7dc4f3134df3eebd34fbc99c138afc38392db has eleven assets;
+every remote size/SHA256 matches local files. Exact packaged6 passed all three
+Chrome regressions (34 seconds). A real three-app Workspace58/Clips4 predecessor
+then used the online protected component updater to6: identities, ordinary files
+and existing protected-original bytes retained; journal complete. Post works via
+the real MyAccounts OIDC/Photos guard. Three screens checked at320/390/1024,
+integrated Workspace picker, Escape/focus return, no floating launcher overlap,
+no page errors. All synthetic runtime processes stopped.
+
+Owner Workspace58 then received only Clips6 through the normal backed-up online
+updater. All25 app entries and24 running services retained; other24 app contracts,
+package pins, paths, identities, selection, ports and installed Chat9 preserved.
+Installed Clips EXE matches the public SHA256; newest recovery manifest verified,
+transaction complete. MyAccounts monitor remains UP. No owner data was used as
+a test fixture. See docs/evidence/upload-{native-acceptance,deployment,publication}.json.
+
+Preview5 remains immutable and is labelled superseded; do not reuse its broken
+managed manifest. No Workspace59 or new Android APK was required. Android2 loads
+the updated server UI; physical Android verification remains outstanding.
+Refresh the My Clips tab/PWA to load the three-screen flow. Published source tag
+stays3ca7dc4; this subsequent documentation handoff must not replace its assets.
