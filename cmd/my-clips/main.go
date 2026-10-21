@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-var version = "0.1.0-preview.5"
+var version = "0.1.0-preview.6"
 
 func main() {
 	if e := apphost.Main(apphost.Config{ID: "clips", Name: "My Clips", Version: version, Listen: "127.0.0.1:9014", MediaCapture: true}, webui.Files(), func(h *apphost.Host) (apphost.Application, error) { return clips.New(h) }); e != nil {

@@ -41,3 +41,17 @@ GOTMPDIR on C NTFS; module/build caches on I. Published assets are immutable.
 Resume: finish acceptance, review diff, build release5 with exact source commit,
 create managed workspace-update.json from public Workspace58 catalog, verify
 published asset digests, then use normal backed-up updater selecting only clips.
+
+
+## Packaging correction
+
+Preview5 source289fd0d and eleven assets were published/verified. The isolated
+Workspace58→Clips5 online upgrade then safely refused the manifest before
+downtime: it included clips-contract from the full distribution catalog, while
+installed catalogs retain only the executable and three license packages.
+Preview4 had the same inherited publisher mistake. Do not replace immutable5
+assets. Preview6 uses the installed catalog shape and only those four packages;
+compatibility.json remains in the standalone ZIP. The UI code is unchanged.
+Native predecessor setup/guard/OIDC and original upload passed before refusal.
+An initial harness attempt also used unsupported old `gh auth token`; removed
+that call. Anonymous public update discovery works without a token.

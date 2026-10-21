@@ -1,5 +1,12 @@
 # Changes
 
+## 0.1.0-preview.6
+
+Corrects the component update manifest to include only installed executable and
+license packages. Compatibility documentation remains in the downloadable ZIP,
+but is not introduced as an unknown installed package. Supersedes preview5 for
+managed updates; the three-screen upload UI is unchanged.
+
 ## 0.1.0-preview.5
 
 Upload now follows three separate screens: media selection, full-screen preview

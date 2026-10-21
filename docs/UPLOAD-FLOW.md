@@ -1,4 +1,4 @@
-# Simple upload flow (preview5)
+# Simple upload flow (preview6)
 
 1. Upload opens Recents. Choose videos or photos from the device picker. The
    three-column grid shows local thumbnails, durations and selection order.
@@ -38,3 +38,14 @@ Visual captures use synthetic patterns, not the user's reference photos:
 ![Select media](screenshots/upload-select-mobile.png)
 ![Preview](screenshots/upload-preview-mobile.png)
 ![Post details](screenshots/upload-post-mobile.png)
+
+## Managed release packaging
+
+Generate `workspace-update.json` from the installed catalog shape, not every
+documentation payload in an offline distribution bundle. The Clips group must
+contain exactly `clips`, `clips-LICENSE`, `clips-NOTICE` and
+`clips-THIRD-PARTY-LICENSES.txt`. Fresh and existing installs do not retain the
+bundle's `clips-contract` documentation package. Keep compatibility.json inside
+the standalone ZIP instead. Preview5's manifest included that unknown package;
+the updater safely refused it before downtime. Preview6 corrects this without
+changing published preview5 assets or weakening updater validation.
