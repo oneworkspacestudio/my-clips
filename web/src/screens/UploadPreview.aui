@@ -1,0 +1,38 @@
+Page UploadPreview variant=upload-preview
+  Stack variant=preview-canvas
+    Section id=editor-preview
+    Row variant=preview-header
+      Button action=selectMedia variant=upload-icon aria-label="Back to media"
+        Icon name=ChevronLeft size=30
+      If condition=$workspace
+        Link href=$workspace variant=upload-workspace workspaceApps=true aria-label="Open Workspace apps"
+          Icon name=PanelsTopLeft size=22
+      Spacer
+      If condition=$video
+        Button action=editSound variant=preview-pill
+          Icon name=Music2
+          Text "Add sound"
+      Spacer
+    Stack variant=preview-tools
+      Button action=openEditor variant=preview-tool aria-label="Edit video"
+        Icon name=SlidersHorizontal size=29
+        Text "Edit"
+      If condition=$video
+        Button action=editText variant=preview-tool aria-label="Add text"
+          Icon name=Type size=29
+          Text "Text"
+        Button action=editStyle variant=preview-tool aria-label="Filters and effects"
+          Icon name=Sparkles size=29
+          Text "Effects"
+    If condition=$multiple
+      Row variant=preview-clips
+        For each=$clips
+          Button action=selectClip item=$item.key variant=$item.variant aria-label=$item.name
+            Section id=media-thumbnail item=$item
+    If condition=$edited
+      Text variant=preview-note "Your edits are prepared automatically when you post."
+  Row variant=upload-footer
+    Button action=storyDetails variant=upload-secondary
+      Icon name=CirclePlus
+      Text "Your Story"
+    Button action=postDetails variant=upload-primary "Next"

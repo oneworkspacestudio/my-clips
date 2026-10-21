@@ -3,7 +3,7 @@ import {clearDeviceDrafts} from './drafts';
 import{createRoot}from'react-dom/client';
 import{Fields}from'./components/ui';
 import {Shell} from'./generated/Shell';import {Login} from'./generated/Login';import {Settings} from'./generated/Settings';
-import{Product}from'./product';import './styles.css';
+import{Product}from'./product';import './styles.css';import './upload.css';import './upload.css';import './upload.css';import './upload.css';import './upload.css';import './upload.css';import './upload.css';import './upload.css';
 export const base=new URL('.',location.href).pathname.replace(/\/$/,'');
 export let session:any=null;
 export async function request(path:string,options:any={}){const expected=session?.user.id,stamp=session?.csrf;const res=await fetch(base+path,{credentials:'same-origin',...options,headers:{...(options.body&&typeof options.body==='string'?{'Content-Type':'application/json'}:{}),'X-CSRF-Token':session?.csrf||'',...options.headers,'X-Workspace-Expected-Account':expected||''}});const actor=res.headers.get('X-Workspace-Account');if(expected&&actor&&actor!==expected){if(session?.user.id===expected&&session?.csrf===stamp)window.dispatchEvent(new Event('app-account-changed'));throw Error('Account changed; stale response discarded')};if(!res.ok){if(res.status===401&&expected&&session?.user.id===expected&&session?.csrf===stamp)window.dispatchEvent(new Event('app-session-expired'));let text='Request failed ('+res.status+')';try{const b=await res.json();text=b.error||b.message||text}catch{}throw Object.assign(new Error(text),{status:res.status})};return res.headers.get('Content-Type')?.includes('json')?res.json():res.blob()}

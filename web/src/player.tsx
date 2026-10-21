@@ -36,9 +36,25 @@ export function Player({post,request,quality='auto',dataSaver=false,onLike}:any)
  );
 }
 
-export function Preview({file,url,filter='none',flip=false}:any){
+export function Preview({file,url,photo=false,start=0,end,speed=1,filter='none',flip=false}:any){
  const [src,setSrc]=useState(url||'');
  useEffect(()=>{if(!file){setSrc(url||'');return}const u=URL.createObjectURL(file);setSrc(u);return()=>URL.revokeObjectURL(u)},[file,url]);
  const filters:any={none:'none',vivid:'saturate(1.35) contrast(1.08)',warm:'sepia(.2) saturate(1.1)',cool:'hue-rotate(12deg)',mono:'grayscale(1)',vintage:'sepia(.35) saturate(.65)',glow:'brightness(1.08) saturate(1.12)'};
- return src?React.createElement('video',{className:'editor-video',src,controls:true,playsInline:true,style:{filter:filters[filter],transform:flip?'scaleX(-1)':'none'},'aria-label':'Clip preview'}):React.createElement('div',{className:'editor-placeholder'},'MAKE IT YOURS');
+ return src?React.createElement(photo?'img':'video',{className:'editor-video',src,controls:!photo,playsInline:!photo,alt:photo?'Selected photo':undefined,onLoadedMetadata:(e:any)=>{e.currentTarget.currentTime=start;e.currentTarget.playbackRate=speed},onTimeUpdate:(e:any)=>{if(end&&e.currentTarget.currentTime>=end)e.currentTarget.currentTime=start},style:{filter:filters[filter],transform:flip?'scaleX(-1)':'none'},'aria-label':'Clip preview'}):React.createElement('div',{className:'editor-placeholder'},'MAKE IT YOURS');
+}
+
+// File URLs live only for the mounted tile and are revoked when it leaves the picker.
+export function MediaThumbnail({clip,time=0,large=false}:any){
+ const [src,setSrc]=useState('');
+ useEffect(()=>{if(!clip)return;if(clip.thumbnail&&!large&&time===0){setSrc(clip.thumbnail);return}if(!clip.file){setSrc(base+'/api/media/'+clip.media+(clip.photo?'':'?original=1'));return}const url=URL.createObjectURL(clip.file);setSrc(url);return()=>URL.revokeObjectURL(url)},[clip?.file,clip?.media,clip?.thumbnail,time===0,large]);
+ const video=useRef<HTMLVideoElement>(null);
+ useEffect(()=>{if(video.current?.readyState)video.current.currentTime=Math.min(time,Math.max(0,(video.current.duration||0)-.05))},[time,src]);
+ if(!clip)return null;
+ const still=clip.photo||!!(clip.thumbnail&&!large&&time===0);
+ return React.createElement(still?'img':'video',{ref:still?undefined:video,src,alt:clip.photo?clip.name:undefined,className:large?'cover-preview':'media-thumbnail',muted:true,playsInline:true,preload:'metadata','aria-hidden':!large,onLoadedMetadata:(e:any)=>{if(!clip.photo)e.currentTarget.currentTime=Math.min(time,Math.max(0,e.currentTarget.duration-.05))}});
+}
+
+export function PhotoPlayer({post}:any){
+ const [index,setIndex]=useState(0);
+ return React.createElement('div',{className:'player photo-player'},React.createElement('img',{src:base+'/api/media/'+post.media[index],alt:post.alt||post.caption||'Photo post'}),post.media.length>1&&React.createElement('button',{className:'photo-next',onClick:()=>setIndex((index+1)%post.media.length),'aria-label':'Next photo'},(index+1)+' / '+post.media.length+' →'));
 }

@@ -1,5 +1,5 @@
 // Generated from screens/Sheet.aui; edit the AUI source.
-import { Button, Card, Checkbox, Field, Heading, Icon, Input, Link, Page, Row, Section, Spacer, Stack, Text } from "@/components/ui"
+import { Button, Card, Checkbox, Field, Heading, Icon, Input, Link, Page, Row, Section, Select, Spacer, Stack, Text } from "@/components/ui"
 
 export function Sheet({ data, onAction }: { data: any; onAction: (name: string) => void }) {
   return (
@@ -90,6 +90,67 @@ export function Sheet({ data, onAction }: { data: any; onAction: (name: string) 
               <Button onClick={() => onAction("stopRecording")} variant="secondary" disabled={data.notRecording}>Finish</Button>
             </Row>
           </>
+        )}
+        {data.sourceMode && (
+          <>
+            <Text>Your browser shows only media you choose. Add files from Recents, your camera roll or another device folder.</Text>
+            <Field label="Add media"><Input name="files" type="file" accept="video/mp4,video/webm,image/jpeg,image/png,image/gif" multiple={true} /></Field>
+          </>
+        )}
+        {data.locationMode && (
+          <Field label="Location"><Input name="location" placeholder="Add a place" maxLength={200} /></Field>
+        )}
+        {data.audienceMode && (
+          <Field label="Who can watch"><Select name="visibility" options={data.audiences} /></Field>
+        )}
+        {data.privacyMode && (
+          <>
+            <Checkbox name="allowComments">Allow comments</Checkbox>
+            <Checkbox name="allowRemix">Allow Duet & Stitch</Checkbox>
+            <Text>Remixing is available only for public clips. Original files stay private.</Text>
+          </>
+        )}
+        {data.optionsMode && (
+          <>
+            <Field label="Schedule (optional)"><Input name="publishAt" type="datetime-local" /></Field>
+            <Field label="Accessibility description"><Input name="alt" multiline={true} maxLength={1000} placeholder="Describe what is happening" /></Field>
+          </>
+        )}
+        {data.shareMode && (
+          <Text>Your post will be shared to My Clips with your selected audience. After posting, use Share to copy its link or send it through your device's share menu.</Text>
+        )}
+        {data.linkMode && (
+          <>
+            <Field label="Link"><Input name="postLink" type="url" placeholder="https://" /></Field>
+            <Button onClick={() => onAction("addLink")} variant="create">Add to description</Button>
+          </>
+        )}
+        {data.coverMode && (
+          <>
+            <Section id="cover-preview" />
+            {data.coverVideo && (
+              <Field label="Cover frame (seconds)"><Input name="coverTime" type="range" min={0} max={data.coverMax} step={0.1} /></Field>
+            )}
+            <Text>Choose a frame from your final video. For a photo post, the first selected photo is the cover.</Text>
+          </>
+        )}
+        {data.sourceMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
+        )}
+        {data.locationMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
+        )}
+        {data.audienceMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
+        )}
+        {data.privacyMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
+        )}
+        {data.optionsMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
+        )}
+        {data.coverMode && (
+          <Button onClick={() => onAction("closeSheet")} variant="create">Done</Button>
         )}
       </Card>
     </Page>

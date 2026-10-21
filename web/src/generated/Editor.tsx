@@ -6,13 +6,13 @@ export function Editor({ data, onAction }: { data: any; onAction: (name: string)
     <Page>
       <Stack variant="editor-page">
         <Row variant="page-heading">
-          <Button onClick={() => onAction("closeEditor")} variant="icon" aria-label="Close editor"><Icon name="ArrowLeft" /></Button>
+          <Button onClick={() => onAction("doneEditing")} variant="icon" aria-label="Close editor"><Icon name="ArrowLeft" /></Button>
           <Stack>
             <Text variant="eyebrow">CREATE SOMETHING YOU</Text>
-            <Heading level={1}>Your next clip</Heading>
+            <Heading level={1}>Edit / Create video</Heading>
           </Stack>
           <Spacer />
-          <Button onClick={() => onAction("saveDraft")} variant="secondary">Save draft</Button>
+          <Button onClick={() => onAction("doneEditing")} variant="create">Done</Button>
         </Row>
         <Row variant="stepper">
           <Text>01  Capture</Text>
@@ -113,22 +113,10 @@ export function Editor({ data, onAction }: { data: any; onAction: (name: string)
               ))}
             </Card>
             <Card>
-              <Row>
-                <Icon name="Send" />
-                <Heading level={2}>Ready when you are</Heading>
-              </Row>
-              <Field label="Caption"><Input name="caption" placeholder="Describe your clip… #moments" multiline={true} /></Field>
-              <Field label="Who can watch"><Select name="visibility" options={data.audiences} /></Field>
-              <Row>
-                <Checkbox name="allowComments">Comments</Checkbox>
-                <Checkbox name="allowRemix">Duet & Stitch</Checkbox>
-              </Row>
-              <Field label="Schedule (optional)"><Input name="publishAt" type="datetime-local" /></Field>
-              <Text variant="caption">Rendering applies your edits and prepares three streaming qualities.</Text>
-              <Row>
-                <Button onClick={() => onAction("renderClip")} variant="secondary">Render preview</Button>
-                <Button onClick={() => onAction("publishClip")} variant="create" disabled={data.cannotPublish}>Post clip</Button>
-              </Row>
+              <Heading level={2}>Ready to continue?</Heading>
+              <Text>Keep editing or return to your preview. Your video is prepared automatically when you post.</Text>
+              <Button onClick={() => onAction("renderClip")} variant="secondary" disabled={data.noClips}>Preview edits</Button>
+              <Button onClick={() => onAction("doneEditing")} variant="create">Done editing</Button>
               {data.renderStatus && (
                 <Alert>{data.renderStatus}</Alert>
               )}

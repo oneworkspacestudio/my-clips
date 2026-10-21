@@ -16,7 +16,8 @@ Apache-2.0 application code; Kenney CC0 default sounds.
   colour filters including glow, timed text/emoji and voiceover.
 - Six CC0 default sounds, your audio files and browser-authorized My Music
   library selection, with soundtrack trim and mix levels.
-- Render preview, private device drafts, audience selection, scheduling,
+- Three-step upload: select media → preview → post; editing is optional.
+- Automatic video preparation on Post, private device drafts, audience selection, scheduling,
   opt-in Duet/Stitch and a creator studio.
 - Mutual-follow messages, activity inbox, SSE updates, browser Web Push and
   Android's optional periodic activity notifications.

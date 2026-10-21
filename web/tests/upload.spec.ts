@@ -1,0 +1,52 @@
+import {test,expect} from '@playwright/test';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,mkdirSync} from 'node:fs';
+const out='I:/Projects/tooling/clips-upload-20261021';
+test('three screens, optional editor, draft and automatic publish with safe retry',async({page,context,browser})=>{
+ test.setTimeout(240000);mkdirSync(out,{recursive:true});
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ execFileSync('C:/ffmpeg/bin/ffmpeg.exe',['-nostdin','-v','error','-f','lavfi','-i','testsrc2=size=360x640:rate=24:duration=4','-c:v','libx264','-pix_fmt','yuv420p','-y',out+'/upload.mp4'],{windowsHide:true});
+ const buffer=readFileSync(out+'/upload.mp4');
+ await page.goto('/');await page.getByLabel('Email address').fill('creator@example.test');await page.getByLabel('Password',{exact:true}).fill(process.env.MYCLIPS_TEST_PASSWORD!);await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await page.getByRole('button',{name:'Upload',exact:true}).click();
+ await page.setViewportSize({width:390,height:844});
+ await page.getByLabel('Add media',{exact:true}).setInputFiles(Array.from({length:9},(_,i)=>({name:'Moment '+(i+1)+'.mp4',mimeType:'video/mp4',buffer})));
+ await expect(page.getByRole('button',{name:'Next (9)',exact:true})).toBeEnabled();
+ await page.screenshot({path:out+'/01-select-mobile.png'});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ for(let i=9;i>1;i--)await page.getByRole('button',{name:'Deselect Moment '+i+'.mp4',exact:true}).click();
+ await page.getByRole('button',{name:'Photos',exact:true}).click();await expect(page.locator('.grid--media-gallery>.button')).toHaveCount(0);await page.getByRole('button',{name:'All',exact:true}).click();
+ await page.getByRole('button',{name:'Next (1)',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Edit video',exact:true})).toBeVisible();
+ await expect(page.getByLabel('Clip preview')).toBeVisible();await page.screenshot({path:out+'/02-preview-mobile.png'});
+ await expect(page.getByRole('button',{name:'Render preview',exact:true})).toHaveCount(0);
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ await page.getByLabel('Caption',{exact:true}).fill('Simple upload #moments');
+ await page.getByRole('button',{name:/Everyone can view/}).click();await page.getByLabel('Who can watch').selectOption('private');await page.getByRole('button',{name:'Done',exact:true}).click();
+ await page.getByRole('button',{name:/Privacy settings/}).click();await page.getByLabel('Allow comments',{exact:true}).uncheck();await page.getByRole('button',{name:'Done',exact:true}).click();
+ await page.getByRole('button',{name:'Location',exact:false}).click();await page.getByRole('dialog').getByLabel('Location',{exact:true}).fill('Synthetic Studio');await page.getByRole('button',{name:'Done',exact:true}).click();
+ await page.screenshot({path:out+'/03-post-mobile.png'});
+ await page.getByRole('button',{name:'Drafts',exact:true}).click();await expect(page.getByText('Private device draft saved',{exact:true})).toBeVisible();
+ await page.reload();await page.goto('/#profile');await page.getByRole('button',{name:'Open device draft'}).click();await page.getByRole('button',{name:'Next (1)',exact:true}).click();await page.getByRole('button',{name:'Next',exact:true}).click();await expect(page.getByLabel('Caption',{exact:true})).toHaveValue('Simple upload #moments');
+ let uploads=0,jobs=0,publishes=0;page.on('request',r=>{if(r.method()==='POST'){if(r.url().endsWith('/api/media'))uploads++;if(r.url().endsWith('/api/jobs'))jobs++;if(r.url().endsWith('/api/posts'))publishes++}});
+ await page.route('**/api/posts',async route=>{if(route.request().method()==='POST'&&publishes===1)await route.fulfill({status:503,contentType:'application/json',body:'{"error":"Synthetic publish interruption; retry"}'});else await route.continue()});
+ await page.getByRole('button',{name:'Post',exact:true}).click();
+ await expect(page.getByText('Synthetic publish interruption; retry',{exact:true})).toBeVisible({timeout:90000});
+ await expect(page.getByRole('button',{name:'Post',exact:true})).toBeEnabled();await page.getByRole('button',{name:'Post',exact:true}).click();await page.waitForURL(/#watch\//,{timeout:30000});
+ expect(uploads).toBe(1);expect(jobs).toBe(1);expect(publishes).toBe(2);
+ const postID=page.url().split('#watch/')[1];const post=await(await context.request.get('/api/posts/'+postID)).json();expect(post.visibility).toBe('private');expect(post.location).toBe('Synthetic Studio');const options=await(await context.request.get('/api/posts/'+postID+'/options')).json();expect(options.comments).toBe(false);
+ const range=await context.request.get('/api/stream/'+post.media[0]+'/video.mp4',{headers:{Range:'bytes=0-31'}});expect(range.status()).toBe(206);
+ const anonymous=await browser.newContext();expect((await anonymous.request.get(new URL('/api/stream/'+post.media[0]+'/video.mp4',page.url()).href)).status()).toBe(401);await anonymous.close();
+ await page.goto('/#create/select');await page.getByLabel('Add media',{exact:true}).setInputFiles({name:'Edit me.mp4',mimeType:'video/mp4',buffer});await page.getByRole('button',{name:'Edit / Create',exact:true}).click();
+ await page.getByLabel('Filter',{exact:true}).selectOption('warm');await page.getByRole('button',{name:'Apply to selected clip'}).click();await page.getByLabel('Text or emoji sticker').fill('Hello');await page.getByRole('button',{name:'Add timed text'}).click();await page.getByRole('button',{name:'Done',exact:true}).click();
+ await page.getByRole('button',{name:'Next',exact:true}).click();await page.getByRole('button',{name:'Edit cover',exact:true}).click();await page.getByLabel('Cover frame (seconds)').fill('1');await page.getByRole('button',{name:'Done',exact:true}).click();await page.getByRole('button',{name:'Post',exact:true}).click();await page.waitForURL(/#watch\//,{timeout:90000});
+ const editedPost=await(await context.request.get('/api/posts/'+page.url().split('#watch/')[1])).json();const mediaList=await(await context.request.get('/api/media')).json();const media=mediaList.find((m:any)=>m.id===editedPost.media[0]);expect(media.project.coverTime).toBe(1);expect(media.project.clips[0].filter).toBe('warm');expect(media.project.text[0].text).toBe('Hello');
+ for(const width of [320,576,1024]){await page.setViewportSize({width,height:844});await page.goto('/#create/select');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:out+'/select-'+width+'.png'})}
+ expect(errors).toEqual([]);
+});
+
+test('photo selection posts directly and can be viewed',async({page})=>{
+ await page.goto('/');await page.getByLabel('Email address').fill('creator@example.test');await page.getByLabel('Password',{exact:true}).fill(process.env.MYCLIPS_TEST_PASSWORD!);await page.getByRole('button',{name:'Sign in',exact:true}).click();await page.goto('/#create/select');
+ execFileSync('C:/ffmpeg/bin/ffmpeg.exe',['-nostdin','-v','error','-f','lavfi','-i','color=c=teal:size=320x480','-frames:v','1','-update','1','-y',out+'/photo.jpg'],{windowsHide:true});
+ await page.getByLabel('Add media',{exact:true}).setInputFiles(out+'/photo.jpg');await page.getByRole('button',{name:'Next (1)',exact:true}).click();await expect(page.getByLabel('Clip preview')).toHaveJSProperty('tagName','IMG');await page.getByRole('button',{name:'Next',exact:true}).click();await page.getByLabel('Caption',{exact:true}).fill('A photo moment');await page.getByRole('button',{name:'Post',exact:true}).click();await page.waitForURL(/#watch\//);await expect(page.getByRole('img',{name:'A photo moment',exact:true})).toBeVisible();
+});

@@ -1,5 +1,17 @@
 # Changes
 
+## 0.1.0-preview.5
+
+Upload now follows three separate screens: media selection, full-screen preview
+and post details. The optional Edit / Create screen holds the complete editor.
+Post uploads originals and prepares edited video automatically, showing progress;
+no manual render is required. Device drafts, safe retry, photos, stories, captions,
+location, cover frames, audience, scheduling and comments/remix settings are
+integrated. Privacy options commit with publication. Selected videos keep their
+full duration; videos over three minutes require an explicit trim. Gallery tiles
+use local stills and release decoders. Android client2 receives the updated server
+UI without a new APK. Existing protected storage and account boundaries remain.
+
 ## 0.1.0-preview.4
 
 Fixes restart of an existing Clips database. Startup now applies only pending

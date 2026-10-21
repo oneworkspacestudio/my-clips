@@ -1,4 +1,4 @@
-Page Shell
+Page Shell variant=$shellVariant
   Stack variant=sidebar
     Link href="#home" variant=brand
       Image src=$logo alt="My Clips" width=38 height=38

@@ -1,0 +1,48 @@
+Page SelectMedia variant=upload-picker
+  Row variant=upload-header
+    Button action=closeEditor variant=upload-icon aria-label="Close upload"
+      Icon name=X size=28
+    If condition=$workspace
+      Link href=$workspace variant=upload-workspace workspaceApps=true aria-label="Open Workspace apps"
+        Icon name=PanelsTopLeft size=22
+    Spacer
+    Button action=mediaSource variant=upload-pill
+      Text "Recents"
+      Icon name=ChevronDown
+    Spacer
+    Button action=createText variant=upload-pill
+      Icon name=PenLine
+      Text "Text"
+  Row variant=media-tabs
+    For each=$tabs
+      Button action=mediaTab item=$item.id variant=$item.variant aria-pressed=$item.active $item.title
+  Stack variant=picker-library
+    If condition=$emptyLibrary
+      Stack variant=picker-empty
+        Icon name=Images size=48
+        Heading level=1 "Choose your moments"
+        Text "Add videos or photos from your device."
+        Field label="Add media"
+          Input name=files type=file accept="video/mp4,video/webm,image/jpeg,image/png,image/gif" multiple=true
+        Button action=openEditor variant=upload-pill "Create a video"
+    Grid variant=media-gallery columns=3
+      For each=$library
+        Button action=toggleMedia item=$item.key variant=$item.variant aria-label=$item.label aria-pressed=$item.picked
+          Section id=media-thumbnail item=$item
+          Text variant=media-duration $item.durationLabel
+          Text variant=selection-number $item.number
+  Stack variant=picker-bottom
+    If condition=$hasLibrary
+      Field label="Add more media"
+        Input name=files type=file accept="video/mp4,video/webm,image/jpeg,image/png,image/gif" multiple=true
+    Row variant=selected-media
+      For each=$clips
+        Button action=toggleMedia item=$item.key variant=selected-thumbnail aria-label=$item.removeLabel
+          Section id=media-thumbnail item=$item
+          Icon name=X size=16
+          Text variant=media-duration $item.durationLabel
+    Row variant=upload-footer
+      Button action=openEditor variant=upload-secondary
+        Icon name=Scissors
+        Text "Edit / Create"
+      Button action=previewMedia variant=upload-primary disabled=$noClips $nextLabel

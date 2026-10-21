@@ -18,7 +18,11 @@ import (
 
 var streamName = regexp.MustCompile(`^(master\.m3u8|[0-2]\.m3u8|[0-2]-[0-9]{5}\.ts|poster\.jpg|video\.mp4)$`)
 
-func (a *App) makeStreams(ctx context.Context, dir, job string) error {
+func (a *App) makeStreams(ctx context.Context, dir, job string, cover ...float64) error {
+	at := 0.0
+	if len(cover) > 0 {
+		at = cover[0]
+	}
 	master := "#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-INDEPENDENT-SEGMENTS\n"
 	for i, tier := range []struct{ w, h, video, max, buf, audio int }{{360, 640, 450, 650, 1300, 96}, {540, 960, 1000, 1400, 2800, 96}, {720, 1280, 2200, 2800, 5600, 128}} {
 		name := fmt.Sprintf("%d.m3u8", i)
@@ -33,7 +37,7 @@ func (a *App) makeStreams(ctx context.Context, dir, job string) error {
 		master += fmt.Sprintf("#EXT-X-STREAM-INF:BANDWIDTH=%d,AVERAGE-BANDWIDTH=%d,RESOLUTION=%dx%d\n%s\n", peak, avg, tier.w, tier.h, name)
 		a.H.DB.Exec("UPDATE jobs SET progress=? WHERE id=?", 60+i*15, job)
 	}
-	if e := a.ffmpeg(ctx, dir, "-protocol_whitelist", "file,pipe", "-i", "video.mp4", "-frames:v", "1", "-vf", "scale=360:640", "-update", "1", "poster.jpg"); e != nil {
+	if e := a.ffmpeg(ctx, dir, "-protocol_whitelist", "file,pipe", "-ss", number(at), "-i", "video.mp4", "-frames:v", "1", "-vf", "scale=360:640", "-update", "1", "poster.jpg"); e != nil {
 		return e
 	}
 	tmp := filepath.Join(dir, "master.pending")

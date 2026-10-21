@@ -1,13 +1,13 @@
 Page Editor
   Stack variant=editor-page
     Row variant=page-heading
-      Button action=closeEditor variant=icon aria-label="Close editor"
+      Button action=doneEditing variant=icon aria-label="Close editor"
         Icon name=ArrowLeft
       Stack
         Text variant=eyebrow "CREATE SOMETHING YOU"
-        Heading level=1 "Your next clip"
+        Heading level=1 "Edit / Create video"
       Spacer
-      Button action=saveDraft variant=secondary "Save draft"
+      Button action=doneEditing variant=create "Done"
     Row variant=stepper
       Text "01  Capture"
       Icon name=ChevronRight size=16
@@ -103,21 +103,9 @@ Page Editor
               Button action=removeText item=$item.key variant=icon aria-label="Remove text"
                 Icon name=X
         Card
-          Row
-            Icon name=Send
-            Heading level=2 "Ready when you are"
-          Field label="Caption"
-            Input name=caption placeholder="Describe your clip… #moments" multiline=true
-          Field label="Who can watch"
-            Select name=visibility options=$audiences
-          Row
-            Checkbox name=allowComments "Comments"
-            Checkbox name=allowRemix "Duet & Stitch"
-          Field label="Schedule (optional)"
-            Input name=publishAt type=datetime-local
-          Text variant=caption "Rendering applies your edits and prepares three streaming qualities."
-          Row
-            Button action=renderClip variant=secondary "Render preview"
-            Button action=publishClip variant=create disabled=$cannotPublish "Post clip"
+          Heading level=2 "Ready to continue?"
+          Text "Keep editing or return to your preview. Your video is prepared automatically when you post."
+          Button action=renderClip variant=secondary disabled=$noClips "Preview edits"
+          Button action=doneEditing variant=create "Done editing"
           If condition=$renderStatus
             Alert $renderStatus

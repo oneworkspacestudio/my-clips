@@ -57,3 +57,46 @@ Page Sheet
       Row
         Button action=startVoice variant=create disabled=$recording "Record voiceover"
         Button action=stopRecording variant=secondary disabled=$notRecording "Finish"
+    If condition=$sourceMode
+      Text "Your browser shows only media you choose. Add files from Recents, your camera roll or another device folder."
+      Field label="Add media"
+        Input name=files type=file accept="video/mp4,video/webm,image/jpeg,image/png,image/gif" multiple=true
+    If condition=$locationMode
+      Field label="Location"
+        Input name=location placeholder="Add a place" maxLength=200
+    If condition=$audienceMode
+      Field label="Who can watch"
+        Select name=visibility options=$audiences
+    If condition=$privacyMode
+      Checkbox name=allowComments "Allow comments"
+      Checkbox name=allowRemix "Allow Duet & Stitch"
+      Text "Remixing is available only for public clips. Original files stay private."
+    If condition=$optionsMode
+      Field label="Schedule (optional)"
+        Input name=publishAt type=datetime-local
+      Field label="Accessibility description"
+        Input name=alt multiline=true maxLength=1000 placeholder="Describe what is happening"
+    If condition=$shareMode
+      Text "Your post will be shared to My Clips with your selected audience. After posting, use Share to copy its link or send it through your device's share menu."
+    If condition=$linkMode
+      Field label="Link"
+        Input name=postLink type=url placeholder="https://"
+      Button action=addLink variant=create "Add to description"
+    If condition=$coverMode
+      Section id=cover-preview
+      If condition=$coverVideo
+        Field label="Cover frame (seconds)"
+          Input name=coverTime type=range min=0 max=$coverMax step=0.1
+      Text "Choose a frame from your final video. For a photo post, the first selected photo is the cover."
+    If condition=$sourceMode
+      Button action=closeSheet variant=create "Done"
+    If condition=$locationMode
+      Button action=closeSheet variant=create "Done"
+    If condition=$audienceMode
+      Button action=closeSheet variant=create "Done"
+    If condition=$privacyMode
+      Button action=closeSheet variant=create "Done"
+    If condition=$optionsMode
+      Button action=closeSheet variant=create "Done"
+    If condition=$coverMode
+      Button action=closeSheet variant=create "Done"

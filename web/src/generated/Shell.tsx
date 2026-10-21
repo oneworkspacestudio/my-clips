@@ -3,7 +3,7 @@ import { Alert, Button, Divider, Heading, Icon, Image, Input, Link, Page, Row, S
 
 export function Shell({ data, onAction }: { data: any; onAction: (name: string) => void }) {
   return (
-    <Page>
+    <Page variant={data.shellVariant}>
       <Stack variant="sidebar">
         <Link href="#home" variant="brand">
           <Image src={data.logo} alt="My Clips" width={38} height={38} />

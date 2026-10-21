@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "app": "clips",
-  "version": "0.1.0-preview.4",
+  "version": "0.1.0-preview.5",
   "workspaceInstallerIntegration": 1,
   "route": "/clips",
   "minimumWorkspaceVersion": "0.3.0-preview.53",

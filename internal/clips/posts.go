@@ -22,6 +22,7 @@ type Post struct {
 	PublishAt  int64           `json:"publishAt"`
 	Expires    int64           `json:"expires"`
 	Media      []string        `json:"media"`
+	MediaTypes []string        `json:"mediaTypes"`
 	Extras     json.RawMessage `json:"extras"`
 	Profile    any             `json:"profile"`
 	Likes      int             `json:"likes"`
@@ -100,6 +101,12 @@ func (a *App) audience(u string, p Post) bool {
 	return p.Visibility == "public"
 }
 func (a *App) decorate(p Post, user string) Post {
+	for _, id := range p.Media {
+		m, err := a.media(id)
+		if err == nil {
+			p.MediaTypes = append(p.MediaTypes, m.MIME)
+		}
+	}
 	if len(p.Media) > 0 {
 		if m, e := a.media(p.Media[0]); e == nil {
 			var edl EDL
@@ -205,6 +212,8 @@ func (a *App) publish(w http.ResponseWriter, r *http.Request) {
 		Media                                                []string
 		Extras                                               json.RawMessage
 		PublishAt                                            int64
+		Comments                                             *bool
+		Remix                                                bool
 	}
 	if !apphost.Decode(w, r, &in) {
 		return
@@ -303,7 +312,15 @@ func (a *App) publish(w http.ResponseWriter, r *http.Request) {
 		a.fail(w, e)
 		return
 	}
-	// The publication and durable event are one transaction.
+	comments := true
+	if in.Comments != nil {
+		comments = *in.Comments
+	}
+	if _, e = tx.Exec("INSERT INTO clip_options VALUES(?,?,?,0)", id, comments, in.Remix); e != nil {
+		a.fail(w, e)
+		return
+	}
+	// The publication, privacy options and durable event are one transaction.
 	if state == "published" {
 		_, e = tx.Exec("INSERT OR IGNORE INTO events(user_id,actor,category,object,created) SELECT actor,?,'post',?,? FROM relations WHERE target=? AND kind='follow' AND state='accepted'", uid(r), id, now, uid(r))
 	}

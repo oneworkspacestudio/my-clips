@@ -36,6 +36,7 @@ type TextOverlay struct {
 	Size  int     `json:"size"`
 }
 type EDL struct {
+	CoverTime      float64       `json:"coverTime"`
 	Clips          []Clip        `json:"clips"`
 	Mute           bool          `json:"mute"`
 	Quality        string        `json:"quality"`
@@ -96,6 +97,10 @@ func (a *App) createJob(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	duration := edlDuration(edl)
+	if !finite(edl.CoverTime) || edl.CoverTime < 0 || edl.CoverTime >= duration {
+		apphost.Problem(w, 400, "Choose a cover within your video")
+		return
+	}
 	if duration > 180 {
 		apphost.Problem(w, 400, "Keep the final video within 3 minutes")
 		return
@@ -342,7 +347,7 @@ func (a *App) render(ctx context.Context, job, owner, id string, edl EDL) error 
 		return errors.New("invalid output")
 	}
 	a.H.DB.Exec("UPDATE jobs SET progress=45 WHERE id=?", job)
-	if e = a.makeStreams(ctx, dir, job); e != nil {
+	if e = a.makeStreams(ctx, dir, job, edl.CoverTime); e != nil {
 		return e
 	}
 	first, _ := a.media(edl.Clips[0].Media)
